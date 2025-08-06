@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white" />
+
+    <item>
+        <inset
+            android:insetLeft="50dp"
+            android:insetRight="50dp"
+            android:insetTop="2dp"
+            android:insetBottom="2dp">
+            <bitmap
+                android:gravity="center"
+                android:src="@drawable/pyra_splash_screen" />
+        </inset>
+    </item>
+</layer-list>

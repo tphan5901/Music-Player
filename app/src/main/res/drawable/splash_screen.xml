@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color -->
+    <item android:drawable="@android:color/holo_blue_light" />
+
+    <!-- Centered image with proper sizing -->
+    <item>
+        <inset
+            android:insetLeft="64dp"
+            android:insetRight="64dp"
+            android:insetTop="64dp"
+            android:insetBottom="64dp">
+            <bitmap
+                android:gravity="center"
+                android:src="@drawable/pyra_splash_screen"
+                android:width="400dp"
+                android:height="400dp" /> <!-- Set appropriate height -->
+        </inset>
+    </item>
+</layer-list>
