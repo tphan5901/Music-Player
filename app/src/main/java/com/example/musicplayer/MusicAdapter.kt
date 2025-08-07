@@ -2,6 +2,7 @@ package com.example.musicplayer
 
 import android.content.Context
 import android.content.Intent
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -28,17 +29,12 @@ class MusicAdapter(private val context: Context, private val musicList: ArrayLis
         return musicList.size
     }
 
-    fun formatDuration(duration: Long): String {
-        val minutes = duration / 1000 / 60
-        val seconds = (duration / 1000 % 60)
-        return String.format("%02d:%02d", minutes, seconds)
-    }
 
 
     override fun onBindViewHolder(holder: MusicAdapter.MyHolder, position: Int) {
         holder.title.text = musicList[position].title
         holder.album.text = musicList[position].album
-        holder.duration.text = formatDuration(musicList[position].duration)
+        holder.duration.text =  DateUtils.formatElapsedTime(musicList[position].duration)
         Glide.with(context)
             .load(musicList[position].artUri)
             .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())

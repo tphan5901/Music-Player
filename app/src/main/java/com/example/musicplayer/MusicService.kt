@@ -23,15 +23,12 @@ class MusicService: Service() {
     private lateinit var mediaSession : MediaSessionCompat
     private lateinit var runnable: Runnable
 
-    override fun onCreate() {
-        super.onCreate()
-        mediaSession = MediaSessionCompat(baseContext, "My music")
-    }
 
     override fun onBind(intent: Intent?): IBinder{
+        mediaSession = MediaSessionCompat(baseContext, "My music")
         return myBinder
-
     }
+
     inner class MyBinder:Binder(){
         fun currentService(): MusicService{
             return this@MusicService
@@ -108,6 +105,7 @@ class MusicService: Service() {
             binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
         }catch(e:Exception){ return}
     }
+
 
     fun seekBarSetup(){
         runnable = Runnable {

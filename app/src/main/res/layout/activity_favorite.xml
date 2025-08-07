@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FavoriteActivity"
-    android:background="@drawable/ganyu">
+    android:background="@drawable/yuka_kuromochi">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
         android:background="@color/cool_pink">
 
         <ImageButton
+            android:id= "@+id/backBtnFA"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:src="@drawable/back_icon"

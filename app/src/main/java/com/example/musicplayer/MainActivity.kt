@@ -2,8 +2,10 @@ package com.example.musicplayer
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,10 +15,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.ActivityMainBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -29,13 +33,12 @@ class MainActivity : AppCompatActivity() {
         lateinit var MusicListMA: ArrayList<Music>
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         // Switch to the app theme BEFORE calling super.onCreate() and setContentView
         //    setTheme(R.style.Theme_MusicPlayer)
         super.onCreate(savedInstanceState)
-//        requestRuntimePermission()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -68,7 +71,26 @@ class MainActivity : AppCompatActivity() {
                     .show()
 
                 R.id.navAbout -> Toast.makeText(baseContext, "About", Toast.LENGTH_SHORT).show()
-                R.id.navExit -> exitProcess(1)
+                R.id.navExit -> {
+                    val builder = MaterialAlertDialogBuilder(this)
+                    builder.setTitle("Exit")
+                        .setMessage("Do u want to close app")
+                        .setPositiveButton( "Yes"){_, _ ->
+                            if(PlayerActivity.musicService != null){
+                            PlayerActivity.musicService!!.stopForeground(true)
+                            PlayerActivity.musicService!!.mediaPlayer!!.release()
+                            PlayerActivity.musicService = null }
+                            exitProcess(1)
+                        }
+                        .setNegativeButton("No"){ dialog, _->
+                            dialog.dismiss()
+                        }
+                    val customDialog = builder.create()
+                    customDialog.show()
+                    customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                    customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+
+                }
             }
             true
         }
@@ -98,8 +120,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onRequestPermissionsResult(
@@ -195,6 +215,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         return tempList
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!PlayerActivity.isPlaying && PlayerActivity.musicService != null){
+            PlayerActivity.musicService!!.stopForeground(true)
+            PlayerActivity.musicService!!.mediaPlayer!!.release()
+            PlayerActivity.musicService = null
+            exitProcess(1)
+
+        }
     }
 
 }

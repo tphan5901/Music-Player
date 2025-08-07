@@ -5,10 +5,12 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.media.MediaPlayer
+import android.media.audiofx.AudioEffect
 import android.os.Bundle
 import android.os.IBinder
 import android.text.format.DateUtils
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -17,8 +19,6 @@ import com.example.musicplayer.databinding.ActivityPlayerBinding
 
 
 class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCompletionListener {
-
-
     companion object{
         lateinit var musicListPA : ArrayList<Music>
         var songPosition: Int = 0
@@ -65,7 +65,17 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.cool_pink))
             }
         }
+        binding.equalizerBtnPA.setOnClickListener {
+            try{
+                val EqIntent = Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL)
+                EqIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, musicService!!.mediaPlayer!!.audioSessionId)
+                EqIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, baseContext.packageName)
+                EqIntent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
+                startActivityForResult(EqIntent, 13)
+            } catch (e: Exception){ Toast.makeText(this, "Equalize", Toast.LENGTH_SHORT).show()}
+        }
     }
+
     private fun setLayout(){
         Glide.with(this)
             .load(musicListPA[songPosition].artUri)
@@ -163,5 +173,10 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         try{setLayout()}catch (e:Exception){return}
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 13 || resultCode == RESULT_OK)
+            return
+    }
 }
 

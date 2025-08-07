@@ -10,9 +10,9 @@ class PlaylistActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_playlist)
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backBtnPLA.setOnClickListener{ finish() }
     }
 }
 

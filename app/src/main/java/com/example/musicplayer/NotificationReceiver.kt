@@ -19,6 +19,7 @@ class NotificationReceiver: BroadcastReceiver() {
                 ApplicationClass.NEXT ->  prevNextSong(increment = true, context = context!!)
                 ApplicationClass.EXIT ->{
                     PlayerActivity.musicService!!.stopForeground(true)
+                    PlayerActivity.musicService!!.mediaPlayer!!.release()
                     PlayerActivity.musicService = null
                     exitProcess(1)
                 }
@@ -39,6 +40,7 @@ class NotificationReceiver: BroadcastReceiver() {
         PlayerActivity.musicService!!.showNotification(R.drawable.play_icon)
         PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
     }
+
     private fun prevNextSong(increment: Boolean, context: Context){
         setSongPosition(increment = increment)
         PlayerActivity.musicService!!.createMediaPlayer()
@@ -49,5 +51,6 @@ class NotificationReceiver: BroadcastReceiver() {
         PlayerActivity.binding.songNamePA.text = musicListPA[songPosition].title
         playMusic()
     }
+
 }
 
