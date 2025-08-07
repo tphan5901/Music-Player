@@ -8,7 +8,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.PlayerActivity.Companion.binding
 import com.example.musicplayer.PlayerActivity.Companion.musicListPA
 import com.example.musicplayer.PlayerActivity.Companion.songPosition
-import kotlin.system.exitProcess
 
 
 class NotificationReceiver: BroadcastReceiver() {
@@ -17,13 +16,9 @@ class NotificationReceiver: BroadcastReceiver() {
                 ApplicationClass.PREVIOUS -> prevNextSong(increment = false, context = context!!)
                 ApplicationClass.PLAY -> if(PlayerActivity.isPlaying) pauseMusic() else playMusic()
                 ApplicationClass.NEXT ->  prevNextSong(increment = true, context = context!!)
-                ApplicationClass.EXIT ->{
-                    PlayerActivity.musicService!!.stopForeground(true)
-                    PlayerActivity.musicService!!.mediaPlayer!!.release()
-                    PlayerActivity.musicService = null
-                    exitProcess(1)
+                ApplicationClass.EXIT -> {
+                    exitApplication()
                 }
-
             }
     }
 

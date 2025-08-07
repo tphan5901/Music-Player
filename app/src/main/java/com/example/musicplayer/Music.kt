@@ -2,6 +2,7 @@ package com.example.musicplayer
 
 import android.media.MediaMetadataRetriever
 import java.util.concurrent.TimeUnit
+import kotlin.system.exitProcess
 
 data class Music(val id:String, val title:String, val album:String, val artist:String, val duration: Long = 0, val path: String,
     val artUri:String) {
@@ -37,5 +38,12 @@ fun setSongPosition(increment: Boolean){
             else --PlayerActivity.songPosition
         }
     }
+}
 
+fun exitApplication(){
+    if(PlayerActivity.musicService != null){
+        PlayerActivity.musicService!!.stopForeground(true)
+        PlayerActivity.musicService!!.mediaPlayer!!.release()
+        PlayerActivity.musicService = null }
+    exitProcess(1)
 }

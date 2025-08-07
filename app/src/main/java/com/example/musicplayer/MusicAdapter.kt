@@ -29,7 +29,7 @@ class MusicAdapter(private val context: Context, private val musicList: ArrayLis
     }
 
 
-    //convert song file duration to readable format
+    //convert duration of song file to readable format
     fun formatDuration(durationMs: Long): String {
         val totalSeconds = durationMs / 1000
         val minutes = totalSeconds / 60
