@@ -23,6 +23,7 @@ class MusicAdapter(private val context: Context, private val musicList: ArrayLis
         return MyHolder(MusicViewBinding.inflate(LayoutInflater.from(context), parent, false))
     }
 
+    //return number of items in musicList[]
     override fun getItemCount(): Int {
         return musicList.size
     }

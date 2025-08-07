@@ -16,6 +16,7 @@
         android:layout_weight="1">
 
         <ImageButton
+            android:id = "@+id/backBtnPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/previous_icon"
@@ -126,6 +127,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/tvSeekBarStart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -134,12 +136,14 @@
             android:gravity="center"/>
 
         <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seekBarPA"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             tools:ignore="NestedWeights"/>
 
         <TextView
+            android:id="@+id/tvSeekBarEnd"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
@@ -156,6 +160,7 @@
         android:layout_weight="1">
 
         <ImageButton
+            android:id = "@+id/repeatBtnPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="40dp"

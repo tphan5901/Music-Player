@@ -7,13 +7,16 @@ import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.IBinder
+import android.text.format.DateUtils
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityPlayerBinding
 
 
-class PlayerActivity : AppCompatActivity(), ServiceConnection {
+class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCompletionListener {
 
 
     companion object{
@@ -24,6 +27,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
         var musicService: MusicService? = null
         @SuppressLint("StaticFieldLeak")
         lateinit var binding: ActivityPlayerBinding
+        var repeat: Boolean = false
 
     }
 
@@ -37,12 +41,30 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
         startService(intent)
 
         initializeLayout()
+        binding.backBtnPA.setOnClickListener{ finish() }
         binding.playPauseBtnPA.setOnClickListener{
             if(isPlaying) pauseMusic()
             else playMusic()
         }
         binding.previousBtnPA.setOnClickListener{ prevNextSong(increment = false) }
         binding.nextBtnPA.setOnClickListener{ prevNextSong(increment = true) }
+        binding.seekBarPA.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(fromUser) musicService!!.mediaPlayer!!.seekTo(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+            override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+        })
+        binding.repeatBtnPA.setOnClickListener{
+            if(!repeat){
+                repeat = true
+                binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
+            }else {
+                repeat = false
+                binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.cool_pink))
+            }
+        }
     }
     private fun setLayout(){
         Glide.with(this)
@@ -50,6 +72,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
             .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
             .into(binding.songImgPA)
         binding.songNamePA.text = musicListPA[songPosition].title
+        if(repeat) binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
+
     }
 
     private fun createMediaPlayer(){
@@ -61,6 +85,13 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
             musicService!!.mediaPlayer!!.start()
             isPlaying= true
             binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
+            musicService!!.showNotification(R.drawable.pause_icon)
+            binding.tvSeekBarStart.text = DateUtils.formatElapsedTime(musicService!!.mediaPlayer!!.currentPosition.toLong() / 1000)
+            binding.tvSeekBarEnd.text = DateUtils.formatElapsedTime(musicService!!.mediaPlayer!!.duration.toLong() / 1000)
+
+            binding.seekBarPA.progress = 0
+            binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
+            musicService!!.mediaPlayer!!.setOnCompletionListener(this)
         }catch(e:Exception){ return}
     }
 
@@ -86,7 +117,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
     private fun playMusic(){
         binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
         //uncommenting this line causes errors
-    //    musicService!!.showNotification(R.drawable.pause_icon)
+        musicService!!.showNotification(R.drawable.pause_icon)
         isPlaying = true
         musicService!!.mediaPlayer!!.start()
     }
@@ -94,7 +125,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
     private fun pauseMusic(){
         binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
         //uncommenting this line causes errors
-    //    musicService!!.showNotification(R.drawable.play_icon)
+        musicService!!.showNotification(R.drawable.play_icon)
         isPlaying = false
         musicService!!.mediaPlayer!!.pause()
     }
@@ -112,28 +143,24 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection {
 
     }
 
-    private fun setSongPosition(increment: Boolean){
-        if(increment){
-            if(musicListPA.size -1 == songPosition)
-                songPosition = 0
-            else ++songPosition
-        }else{
-            if(0== songPosition)
-                songPosition = musicListPA.size - 1
-            else --songPosition
-        }
-    }
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val binder = service as MusicService.MyBinder
         musicService = binder.currentService()
-        //uncommenting this line causes errors
-    //    musicService!!.showNotification(R.drawable.pause_icon)
         createMediaPlayer()
+        musicService!!.seekBarSetup()
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
         musicService = null
+    }
+
+    //when song completes, increment to next position in the array
+    //create new screen
+    override fun onCompletion(mp: MediaPlayer?) {
+        setSongPosition(increment = true)
+        createMediaPlayer()
+        try{setLayout()}catch (e:Exception){return}
     }
 
 }
