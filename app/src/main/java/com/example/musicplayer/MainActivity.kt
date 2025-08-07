@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                     customDialog.show()
                     customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
                     customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
-
                 }
             }
             true
@@ -185,35 +184,25 @@ class MainActivity : AppCompatActivity() {
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                val titleC =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+                val titleC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
                 val idC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
-                val albumC =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))
-                val artistC =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
-                val pathC =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
-                val durationC =
-
-                    cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
+                val albumC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))
+                val artistC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+                val pathC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
+                val durationC = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
                 val albumIdC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID))
                 val uri = Uri.parse("content://media/external/audio/albumart")
                 val artUriC = Uri.withAppendedPath(uri, albumIdC).toString()
 
-                val music = Music(id = idC, title = titleC, album = albumC, artist = artistC, path = pathC, duration = durationC,
-                    artUri = artUriC)
-
+                val music = Music(id = idC, title = titleC, album = albumC, artist = artistC, path = pathC, duration = durationC, artUri = artUriC)
                 val file = File(pathC)
                 if (file.exists()) {
                     tempList.add(music)
-
                 }
-            } while (cursor.moveToNext())
-
+            }
+            while (cursor.moveToNext())
             cursor.close()
         }
-
         return tempList
     }
 
