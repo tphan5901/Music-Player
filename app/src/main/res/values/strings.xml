@@ -23,7 +23,10 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="song_album">Song Album</string>
-    <string name = "min_15">15</string>
-    <string name = "min_30">30</string>
-    <string name = "min_60">60</string>
+    <string name="min_15">15</string>
+    <string name="min_30">30</string>
+    <string name="min_60">60</string>
+    <string name="search_view">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

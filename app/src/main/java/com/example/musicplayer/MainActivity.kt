@@ -10,7 +10,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -23,7 +26,6 @@ import com.example.musicplayer.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
@@ -31,7 +33,11 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var MusicListMA: ArrayList<Music>
+        lateinit var musicListSearch : ArrayList<Music>
+        var search: Boolean = false
+
     }
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.R)
@@ -41,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         //nav drawer
         toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)
@@ -143,15 +150,17 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
     @RequiresApi(Build.VERSION_CODES.R)
     private fun initializeLayout() {
+        search = false
         MusicListMA = getAllAudio()
         binding.musicRV.setHasFixedSize(true)
         binding.musicRV.setItemViewCacheSize(13)
         binding.musicRV.layoutManager = LinearLayoutManager(this@MainActivity)
         musicAdapter = MusicAdapter(this@MainActivity, MusicListMA)
         binding.musicRV.adapter = musicAdapter
-        binding.totalSongs.text = "Total Songs: " + musicAdapter.itemCount
+        binding.totalSongs.text = "All Songs: " + musicAdapter.itemCount
     }
 
     @SuppressLint("Recycle")
@@ -209,6 +218,47 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.search_view, menu)
+
+        val searchView = menu?.findItem(R.id.searchView)?.actionView as? SearchView
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                musicListSearch = ArrayList()
+                if (!newText.isNullOrEmpty()) {
+                    val userInput = newText.lowercase()
+                    for (song in MusicListMA) {
+                        Log.d("MusicData", "ID: ${song.id}")
+                        Log.d("MusicData", "Title: ${song.title}")
+                        Log.d("MusicData", "Album: ${song.album}")
+                        Log.d("MusicData", "Artist: ${song.artist}")
+                        Log.d("MusicData", "Duration: ${song.duration}")
+                        Log.d("MusicData", "Path: ${song.path}")
+                        Log.d("MusicData", "Art URI: ${song.artUri}")
+
+                        Log.d("SearchDebug", "Song title: ${song.title}, artist: ${song.artist}, album: ${song.album}")
+                        if (song.title.lowercase().contains(userInput)) {
+                            musicListSearch.add(song)
+                        }
+                    }
+                    search = true
+                    musicAdapter.updateMusicList(searchList = musicListSearch)
+                } else {
+                    search = false
+                    musicAdapter.updateMusicList(MusicListMA)
+                }
+                return true
+            }
+        })
+        return true
+    }
+
 
 }
 

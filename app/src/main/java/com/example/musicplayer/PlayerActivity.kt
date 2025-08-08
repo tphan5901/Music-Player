@@ -124,6 +124,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
 
     private fun setLayout(){
+
         Glide.with(this)
             .load(musicListPA[songPosition].artUri)
             .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
@@ -153,9 +154,19 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         }catch(e:Exception){ return}
     }
 
+    //search bar in music player
     private fun initializeLayout(){
         songPosition = intent.getIntExtra("index", 0)
         when(intent.getStringExtra("class")){
+            "MusicAdapterSearch"->{
+                //create new arrayList
+                musicListPA = ArrayList()
+                //add the search result(item)
+                musicListPA.addAll(MainActivity.musicListSearch)
+
+                //refresh the display
+                setLayout()
+            }
             "MusicAdapter" -> {
                 musicListPA = ArrayList()
                 musicListPA.addAll(MainActivity.MusicListMA)
@@ -172,6 +183,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         }
 
     }
+
     private fun playMusic(){
         binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
         //uncommenting this line causes errors
