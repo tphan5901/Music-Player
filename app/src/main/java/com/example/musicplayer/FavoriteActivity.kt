@@ -19,6 +19,8 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //removes header bar
+        supportActionBar?.hide()
         //bind the back button eventListener
         val tempList = ArrayList<String>()
         tempList.add("Song 1")

@@ -22,6 +22,8 @@ class PlaylistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
+        //removes header bar
+        supportActionBar?.hide()
         setContentView(binding.root)
         val tempList = ArrayList<String>()
         binding.playlistRV.setHasFixedSize(true)
