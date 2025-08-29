@@ -10,7 +10,6 @@
     app:cardBackgroundColor="@android:color/transparent">
     <!--app:cardBackgroundColor="@android:color/transparent"-->
 
-
     <!--ImageBox-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/playlistImg"

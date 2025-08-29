@@ -16,12 +16,12 @@ data class Music(val id:String, val title:String, val album:String, val artist:S
 
 }
 
-class Playlist{
+    class Playlist{
         lateinit var name: String
         lateinit var playlist: ArrayList<Music>
         lateinit var createdBy: String
         lateinit var createdOn: String
-    }
+        }
 
     class MusicPlaylist{
         var ref: ArrayList<Playlist> = ArrayList()
@@ -34,8 +34,6 @@ class Playlist{
                 minutes * TimeUnit.SECONDS.convert(1, TimeUnit.MINUTES))
         return String.format("%02d:%02d", minutes, seconds)
     }
-
-
 
 
 fun setSongPosition(increment: Boolean){

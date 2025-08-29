@@ -43,17 +43,17 @@ class PlaylistActivity : AppCompatActivity() {
             .setTitle("Playlist Form")
             .setPositiveButton( "Add"){dialog, _ ->
                 val playlistName = binder.playlistName.text
-                val createdBy = binder.yourName.text
-                if(playlistName != null && createdBy != null){
-                    if(playlistName.isNotEmpty() && createdBy.isNotEmpty()){
-                        addPlaylist(playlistName.toString(), createdBy.toString())
+
+                if(playlistName != null){
+                    if(playlistName.isNotEmpty()){
+                        addPlaylist(playlistName.toString())
                     }
                 }
                 dialog.dismiss()
             }.show()
     }
 
-    private fun addPlaylist(name: String, createdBy: String){
+    private fun addPlaylist(name: String){
         var playlistExists = false
         for(i in musicPlaylist.ref){
             if(name.equals(i.name)){
@@ -66,7 +66,6 @@ class PlaylistActivity : AppCompatActivity() {
             val tempPlaylist = Playlist()
             tempPlaylist.name = name
             tempPlaylist.playlist = ArrayList()
-            tempPlaylist.createdBy = createdBy
             val calendar = java.util.Calendar.getInstance().time
             val sdf = SimpleDateFormat("dd MMM yyyy", java.util.Locale.ENGLISH)
             tempPlaylist.createdOn = sdf.format(calendar)
