@@ -29,11 +29,10 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
     }
 
     fun updateMusicList(searchList: ArrayList<Music>) {
-        this.musicList = searchList
+        musicList = ArrayList()
+        musicList.addAll(searchList)
         notifyDataSetChanged()
     }
-
-
 
     //convert duration of song file to readable format
     fun formatDuration(durationMs: Long): String {
@@ -59,7 +58,10 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
         holder.root.setOnClickListener{
             when{
                 MainActivity.search -> sendIntent(ref = "MusicAdapterSearch", pos = position)
+                musicList[position].id == PlayerActivity.nowPlayingId ->
+                    sendIntent(ref = "NowPlaying", pos = PlayerActivity.songPosition)
                 else->sendIntent(ref="MusicAdapter", pos = position)
+
             }
         }
     }
@@ -68,7 +70,6 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("index", pos)
         intent.putExtra("class", ref)
-
         ContextCompat.startActivity(context, intent, null)
     }
 

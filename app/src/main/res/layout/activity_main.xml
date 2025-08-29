@@ -29,8 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <!--shuffle Button-->
             <Button
@@ -77,9 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/total_song"
-            android:textColor="?colorOnPrimary"
-            android:layout_margin="10dp"
-            />
+            android:textColor="@color/white"
+            android:layout_margin="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/musicRV"
@@ -88,6 +86,7 @@
         android:scrollbars="vertical"
         android:scrollbarThumbVertical="@drawable/scrollbar_icon"
        />
+
 
 </LinearLayout>
 
@@ -113,6 +112,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
@@ -24,6 +23,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -54,8 +55,20 @@ class MainActivity : AppCompatActivity() {
         binding.root.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        if(requestRuntimePermission())
+
+        if(requestRuntimePermission()) {
             initializeLayout()
+            // storing favorites data
+            FavoriteActivity.favoriteSongs = ArrayList()
+            val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE)
+            val jsonString = editor.getString("FavoriteSongs", null)
+            val typeToken = object : TypeToken<ArrayList<Music>>(){}.type
+            if(jsonString != null){
+                val data: ArrayList<Music> = GsonBuilder().create().fromJson(jsonString, typeToken)
+                FavoriteActivity.favoriteSongs.addAll(data)
+            }
+
+        }
 
         binding.shuffleBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
@@ -96,6 +109,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     //Request External Access Permission on Runtime
@@ -213,10 +227,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(!PlayerActivity.isPlaying && PlayerActivity.musicService != null){
+        if (!PlayerActivity.isPlaying && PlayerActivity.musicService != null) {
             exitApplication()
-
         }
+    }
+
+    override fun onResume(){
+        super.onResume()
+        // storing favorites data
+        val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
+        val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
+        editor.putString("FavoriteSongs", jsonString)
+        editor.apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -234,15 +256,6 @@ class MainActivity : AppCompatActivity() {
                 if (!newText.isNullOrEmpty()) {
                     val userInput = newText.lowercase()
                     for (song in MusicListMA) {
-                        Log.d("MusicData", "ID: ${song.id}")
-                        Log.d("MusicData", "Title: ${song.title}")
-                        Log.d("MusicData", "Album: ${song.album}")
-                        Log.d("MusicData", "Artist: ${song.artist}")
-                        Log.d("MusicData", "Duration: ${song.duration}")
-                        Log.d("MusicData", "Path: ${song.path}")
-                        Log.d("MusicData", "Art URI: ${song.artUri}")
-
-                        Log.d("SearchDebug", "Song title: ${song.title}, artist: ${song.artist}, album: ${song.album}")
                         if (song.title.lowercase().contains(userInput)) {
                             musicListSearch.add(song)
                         }
@@ -256,7 +269,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
 

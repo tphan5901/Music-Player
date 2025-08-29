@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
@@ -11,10 +12,8 @@ import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
-import com.example.musicplayer.PlayerActivity.Companion.binding
-import com.example.musicplayer.PlayerActivity.Companion.musicListPA
-import com.example.musicplayer.PlayerActivity.Companion.musicService
-import com.example.musicplayer.PlayerActivity.Companion.songPosition
+
+
 //import androidx.media.app.NotificationCompat
 
 class MusicService: Service() {
@@ -89,23 +88,46 @@ class MusicService: Service() {
     }
 
 
-    fun createMediaPlayer(){
-        try{
-            if (musicService!!.mediaPlayer == null) musicService!!.mediaPlayer = MediaPlayer()
-            musicService!!.mediaPlayer!!.reset()
-            musicService!!.mediaPlayer!!.setDataSource(musicListPA[songPosition].path)
-            musicService!!.mediaPlayer!!.prepare()
-
-            binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
-            musicService!!.showNotification(R.drawable.pause_icon)
-
-            binding.tvSeekBarStart.text = DateUtils.formatElapsedTime(mediaPlayer!!.currentPosition.toLong() / 1000)
-            binding.tvSeekBarEnd.text = DateUtils.formatElapsedTime(mediaPlayer!!.currentPosition.toLong() / 1000)
-
-            binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
-        }catch(e:Exception){ return}
+    fun getImgArt(path: String): ByteArray? {
+        val retriever = MediaMetadataRetriever()
+        return try {
+            retriever.setDataSource(path)
+            retriever.embeddedPicture
+        } catch (e: Exception) {
+            null
+        } finally {
+            retriever.release()
+        }
     }
 
+
+    fun createMediaPlayer() {
+        try {
+            if (mediaPlayer == null) mediaPlayer = MediaPlayer()
+            mediaPlayer?.reset()
+            mediaPlayer?.setDataSource(PlayerActivity.musicListPA[PlayerActivity.songPosition].path)
+            mediaPlayer?.prepare()
+
+            PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
+            showNotification(R.drawable.pause_icon)
+            PlayerActivity.binding.tvSeekBarStart.text =
+                formatDuration(mediaPlayer!!.currentPosition.toLong())
+            PlayerActivity.binding.tvSeekBarEnd.text =
+                formatDuration(mediaPlayer!!.duration.toLong())
+            PlayerActivity.binding.seekBarPA.progress = 0
+            PlayerActivity.binding.seekBarPA.max = mediaPlayer!!.duration
+            PlayerActivity.nowPlayingId = PlayerActivity.musicListPA[PlayerActivity.songPosition].id
+
+        } catch (e: Exception) {
+            return
+        }
+    }
+
+    fun formatDuration(duration: Long): String {
+        val minutes = (duration / 1000) / 60
+        val seconds = (duration / 1000) % 60
+        return String.format("%02d:%02d", minutes, seconds)
+    }
 
     fun seekBarSetup(){
         runnable = Runnable {

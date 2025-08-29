@@ -7,6 +7,7 @@
     tools:context=".NowPlaying"
     android:background="@color/cool_pink">
 
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgNP"
         android:layout_width="70dp"
@@ -52,6 +53,6 @@
         android:layout_toEndOf="@id/songImgNP"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
 </RelativeLayout>

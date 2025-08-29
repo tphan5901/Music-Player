@@ -46,7 +46,16 @@ class NotificationReceiver: BroadcastReceiver() {
             .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
             .into(binding.songImgPA)
         PlayerActivity.binding.songNamePA.text = musicListPA[songPosition].title
+        Glide.with(context)
+            .load(PlayerActivity.musicListPA[PlayerActivity.songPosition].artUri)
+            .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
+            .into(NowPlaying.binding.songImgNP)
+        NowPlaying.binding.songNameNP.text = PlayerActivity.musicListPA[PlayerActivity.songPosition].title
+
         playMusic()
+        PlayerActivity.fIndex = favoriteChecker(PlayerActivity.musicListPA[PlayerActivity.songPosition].id)
+        if(PlayerActivity.isFavorite) PlayerActivity.binding.favoriteBtnPA.setImageResource(R.drawable.favorite_icon)
+        else PlayerActivity.binding.favoriteBtnPA.setImageResource(R.drawable.favorite_empty_icon)
     }
 
 }

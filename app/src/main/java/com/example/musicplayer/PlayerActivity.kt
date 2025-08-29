@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+//import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ComponentName
@@ -8,7 +9,6 @@ import android.content.ServiceConnection
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.media.audiofx.AudioEffect
-import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import android.text.format.DateUtils
@@ -16,8 +16,8 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-//import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityPlayerBinding
@@ -38,6 +38,9 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         var min15: Boolean = false
         var min30: Boolean = false
         var min60: Boolean = false
+        var nowPlayingId: String = ""
+        var isFavorite: Boolean = false
+        var fIndex: Int = -1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +48,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //For starting service
-        val intent = Intent(this, MusicService::class.java)
-        bindService(intent, this, BIND_AUTO_CREATE)
-        startService(intent)
 
         initializeLayout()
         binding.backBtnPA.setOnClickListener { finish() }
@@ -116,15 +116,31 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = "audio/*"
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(musicListPA[songPosition].path))
+            shareIntent.putExtra(Intent.EXTRA_STREAM, musicListPA[songPosition].path.toUri())
             startActivity(Intent.createChooser(shareIntent, "Share"))
         }
+        binding.favoriteBtnPA.setOnClickListener {
+            val currentSong = musicListPA[songPosition]
+            if (isFavorite) {
+                // Remove from favorites
+                isFavorite = false
+                binding.favoriteBtnPA.setImageResource(R.drawable.favorite_empty_icon)
+                FavoriteActivity.favoriteSongs.removeIf { it.id == currentSong.id }
+            } else {
+                // Add to favorites
+                isFavorite = true
+                binding.favoriteBtnPA.setImageResource(R.drawable.favorite_icon)
+                FavoriteActivity.favoriteSongs.add(currentSong)
+            }
+        }
+
+
     }
 
 
 
     private fun setLayout(){
-
+        fIndex = favoriteChecker(musicListPA[songPosition].id)
         Glide.with(this)
             .load(musicListPA[songPosition].artUri)
             .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
@@ -132,7 +148,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         binding.songNamePA.text = musicListPA[songPosition].title
         if(repeat) binding.repeatBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
         if(min15 || min30 || min60) binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
-
+        if(isFavorite) binding.favoriteBtnPA.setImageResource(R.drawable.favorite_icon)
+        else binding.favoriteBtnPA.setImageResource(R.drawable.favorite_empty_icon)
     }
 
     private fun createMediaPlayer(){
@@ -151,6 +168,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             binding.seekBarPA.progress = 0
             binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
             musicService!!.mediaPlayer!!.setOnCompletionListener(this)
+            nowPlayingId = musicListPA[songPosition].id
         }catch(e:Exception){ return}
     }
 
@@ -158,31 +176,68 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     private fun initializeLayout(){
         songPosition = intent.getIntExtra("index", 0)
         when(intent.getStringExtra("class")){
+            "FavoriteAdapter"->{
+                val intent = Intent(this, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
+                musicListPA = ArrayList()
+                musicListPA.addAll(FavoriteActivity.favoriteSongs)
+                setLayout()
+
+            }
+            "NowPlaying"->{
+                setLayout()
+                binding.tvSeekBarStart.text = formatDuration(musicService!!.mediaPlayer!!.currentPosition.toLong())
+                binding.tvSeekBarEnd.text = formatDuration(musicService!!.mediaPlayer!!.duration.toLong())
+                binding.seekBarPA.progress = musicService!!.mediaPlayer!!.currentPosition
+                binding.seekBarPA.max = musicService!!.mediaPlayer!!.duration
+                if(isPlaying) binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
+                else binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
+            }
             "MusicAdapterSearch"->{
+                val intent = Intent(this, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
                 //create new arrayList
                 musicListPA = ArrayList()
                 //add the search result(item)
                 musicListPA.addAll(MainActivity.musicListSearch)
-
                 //refresh the display
                 setLayout()
             }
             "MusicAdapter" -> {
+                val intent = Intent(this, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
                 musicListPA = ArrayList()
                 musicListPA.addAll(MainActivity.MusicListMA)
                 setLayout()
 
             }
             "MainActivity"->{
+                val intent = Intent(this, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
                 musicListPA = ArrayList()
                 musicListPA.addAll(MainActivity.MusicListMA)
                 musicListPA.shuffle()
                 setLayout()
 
             }
+            "FavoriteShuffle"->{
+                val intent = Intent(this, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
+                musicListPA = ArrayList()
+                musicListPA.addAll(FavoriteActivity.favoriteSongs)
+                musicListPA.shuffle()
+                setLayout()
+            }
         }
 
     }
+
+
 
     private fun playMusic(){
         binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
@@ -213,6 +268,12 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
     }
 
+    fun formatDuration(duration: Long): String {
+        val minutes = (duration / 1000) / 60
+        val seconds = (duration / 1000) % 60
+        return String.format("%02d:%02d", minutes, seconds)
+    }
+
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val binder = service as MusicService.MyBinder
@@ -233,6 +294,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         try{setLayout()}catch (e:Exception){return}
     }
 
+    @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 13 || resultCode == RESULT_OK)
@@ -248,7 +310,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             Toast.makeText(this, "Music will stop after 15 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min15 = true
-            Thread{Thread.sleep(15 * 60000)
+            Thread{Thread.sleep((15 * 60000).toLong())
             if(min15) exitApplication()}.start()
             dialog.dismiss()
         }
@@ -257,7 +319,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             Toast.makeText(this, "Music will stop after 30 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min30 = true
-            Thread{Thread.sleep(30 * 60000)
+            Thread{Thread.sleep((30 * 60000).toLong())
             if(min30) exitApplication()}.start()
             dialog.dismiss()
         }
@@ -266,7 +328,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             Toast.makeText(this, "Music will stop after 60 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min60 = true
-            Thread{Thread.sleep(60 * 60000)
+            Thread{Thread.sleep((60 * 60000).toLong())
             if(min60) exitApplication()}.start()
             dialog.dismiss()
         }

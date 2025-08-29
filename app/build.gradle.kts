@@ -46,12 +46,15 @@ android {
 dependencies {
 
     // Glide for image loading
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    //for Notification
+    // Storing Objects
+    implementation(libs.gson)
+
+    // for Notification
     implementation("androidx.media:media:1.3.1")
 
     implementation(libs.androidx.core.ktx)

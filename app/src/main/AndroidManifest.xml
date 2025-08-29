@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <!-- Only needed for Android 12 and below -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
@@ -13,7 +12,6 @@
 
     <!-- Notification Permission for Android 14 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
-
 
     <application
         android:name=".ApplicationClass"
@@ -58,7 +56,6 @@
             android:foregroundServiceType="mediaPlayback"
             android:exported="true"
             />
-
 
         <receiver
             android:name=".NotificationReceiver"

@@ -39,24 +39,26 @@
 
         <!--Heart Icon on header-->
     <ImageButton
+        android:id="@+id/favoriteBtnPA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/favorite_empty_icon"
         android:background="@android:color/transparent"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="15dp"
         app:tint="@android:color/holo_red_dark"
         android:contentDescription="@string/favorites_btn"
         />
 
     </LinearLayout>
 
-    <!--Current Song Image-->
+    <!--Song Image-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id = "@+id/songImgPA"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
         android:src="@drawable/pyra_splash_screen"
+        android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/curved"
         app:strokeColor="@color/cool_blue"
         app:strokeWidth="5dp"/>
