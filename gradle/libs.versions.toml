@@ -14,6 +14,8 @@ glide = "4.11.0"
 gson = "2.8.6"
 swiperefreshlayout = "1.1.0"
 androidxMedia = "1.3.1"
+activity = "1.10.1"
+constraintlayout = "2.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +40,8 @@ glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", versi
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-media = { group = "androidx.media", name = "media", version.ref = "androidxMedia" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

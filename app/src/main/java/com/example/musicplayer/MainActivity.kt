@@ -20,8 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.edit
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -213,8 +211,8 @@ class MainActivity : AppCompatActivity() {
                 val durationC = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
                 val albumIdC = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID))
                 // old code
-                //  val uri = Uri.parse("content://media/external/audio/albumart")
-                val uri = "content://media/external/audio/albumart".toUri()
+                val uri = Uri.parse("content://media/external/audio/albumart")
+            //    val uri = "content://media/external/audio/albumart".toUri()
                 val artUriC = Uri.withAppendedPath(uri, albumIdC).toString()
 
                 val music = Music(id = idC, title = titleC, album = albumC, artist = artistC, path = pathC, duration = durationC, artUri = artUriC)
@@ -239,15 +237,15 @@ class MainActivity : AppCompatActivity() {
     override fun onResume(){
         super.onResume()
         // storing favorites data
-        getSharedPreferences("FAVORITES", MODE_PRIVATE).edit {
-            val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
-            putString("FavoriteSongs", jsonString)
-        }
+    //    getSharedPreferences("FAVORITES", MODE_PRIVATE).edit {
+    //        val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
+    //        putString("FavoriteSongs", jsonString)
+    //    }
     //old code
-    //    val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
-    //    val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
-    //    editor.putString("FavoriteSongs", jsonString)
-    //    editor.apply()
+          val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
+          val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
+          editor.putString("FavoriteSongs", jsonString)
+          editor.apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -19,7 +19,6 @@ data class Music(val id:String, val title:String, val album:String, val artist:S
     class Playlist{
         lateinit var name: String
         lateinit var playlist: ArrayList<Music>
-        lateinit var createdBy: String
         lateinit var createdOn: String
         }
 

@@ -47,6 +47,8 @@ dependencies {
 
     // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoriteActivity">
+    tools:context=".SelectionActivity">
 
     <!-- Background image -->
     <ImageView
@@ -28,39 +28,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:layout_marginTop="2dp">
 
         <ImageButton
-            android:id="@+id/backBtnFA"
+            android:id="@+id/backBtnSA"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:src="@drawable/back_icon"
             android:contentDescription="@string/back_btn"
             android:backgroundTint="@android:color/transparent"
             app:tint="@android:color/black"
-            android:padding="5dp"/>
+            android:layout_margin="5dp"/>
 
-        <!--
-        <TextView
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchViewSA"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/playlist_btn"
-            android:gravity="center"
-            android:text="@string/playlist_btn"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
-         -->
+            android:layout_height="50dp"
+            app:queryHint="@string/search_song"
+            app:searchIcon="@drawable/search_icon"
+            android:focusable="false"
+            app:iconifiedByDefault="false"
+            android:background="@drawable/custom_search_view"
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
 
     <!-- RecyclerView for favorite items -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoriteRV"
+        android:id="@+id/selectionRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:paddingBottom="40dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="50dp"
         android:scrollbarThumbVertical="@drawable/scrollbar_icon"
         android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
@@ -68,23 +68,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Shuffle floating action button -->
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/shuffleBtnFA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:contentDescription="@string/shuffle_btn"
-        app:icon="@drawable/shuffle_icon"
-        app:iconSize="35dp"
-        app:iconTint="@color/cool_pink"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:strokeColor="@color/cool_pink"
-        app:strokeWidth="2dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
