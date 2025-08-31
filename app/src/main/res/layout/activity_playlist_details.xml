@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="2dp">
+        android:layout_marginTop="20dp">
 
         <ImageButton
             android:id="@+id/backBtnPD"
@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:paddingBottom="250dp"
+        android:paddingBottom="210dp"
         android:scrollbarThumbVertical="@drawable/scrollbar_icon"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/add_song"
-            android:drawableLeft="@drawable/add_icon"
+            android:drawableTop="@drawable/add_icon"
             android:text="@string/add_song"
             android:textAllCaps="false"
             android:textColor="?colorOnPrimary"
@@ -129,7 +129,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/remove_all"
-            android:drawableLeft="@drawable/remove_icon"
+            android:drawableTop="@drawable/remove_icon"
             android:text="@string/remove_all"
             android:textAllCaps="false"
             android:textColor="?colorOnPrimary"
