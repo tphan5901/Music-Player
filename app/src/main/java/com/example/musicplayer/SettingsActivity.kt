@@ -12,10 +12,13 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Initialize binding first
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setTheme(R.style.coolPink)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
         supportActionBar?.title = "Settings"
+
     }
 
 }

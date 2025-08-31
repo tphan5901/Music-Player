@@ -13,7 +13,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.FragmentNowPlayingBinding
 
 class NowPlaying : Fragment() {
-
     companion object{
         @SuppressLint("StaticFieldLeak")
         lateinit var binding: FragmentNowPlayingBinding

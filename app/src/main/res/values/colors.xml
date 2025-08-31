@@ -11,5 +11,6 @@
     <color name="cool_pink">#EFFB2A7A</color>
     <color name="transparent_gray">#80000000</color>
     <color name="green">#39D575</color> <!-- material green -->
+    <color name="cool_green">#64DD17</color>
 
 </resources>
