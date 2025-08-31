@@ -33,10 +33,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var musicAdapter: MusicAdapter
 
     companion object {
-        lateinit var MusicListMA: ArrayList<Music>
+        lateinit var MusicListMA : ArrayList<Music>
         lateinit var musicListSearch : ArrayList<Music>
         var search: Boolean = false
 
+        var sortOrder: Int = 0
     }
 
 
@@ -67,7 +68,15 @@ class MainActivity : AppCompatActivity() {
                 val data: ArrayList<Music> = GsonBuilder().create().fromJson(jsonString, typeToken)
                 FavoriteActivity.favoriteSongs.addAll(data)
             }
+            /*
+            PlaylistActivity.musicPlaylist = MusicPlaylist()
+            val jsonStringPlaylist = editor.getString("MusicPlaylist", null)
 
+            if(jsonStringPlaylist != null){
+                val dataPlaylist: MusicPlaylist = GsonBuilder().create().fromJson(jsonStringPlaylist, MusicPlaylist::class.java)
+                PlaylistActivity.musicPlaylist = dataPlaylist
+            }
+            */
         }
 
         binding.shuffleBtn.setOnClickListener {
@@ -84,13 +93,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navFeedback -> Toast.makeText(baseContext, "Feedback", Toast.LENGTH_SHORT)
-                    .show()
+                R.id.navFeedback -> startActivity(Intent(this@MainActivity, FeedbackActivity::class.java))
 
-                R.id.navSettings -> Toast.makeText(baseContext, "Settings", Toast.LENGTH_SHORT)
-                    .show()
+                R.id.navSettings -> startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
 
-                R.id.navAbout -> Toast.makeText(baseContext, "About", Toast.LENGTH_SHORT).show()
+
+                R.id.navAbout ->  startActivity(Intent(this@MainActivity, AboutActivity::class.java))
+
                 R.id.navExit -> {
                     val builder = MaterialAlertDialogBuilder(this)
                     builder.setTitle("Exit")
@@ -164,17 +173,27 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun initializeLayout() {
+    @SuppressLint("SetTextI18n")
+    private fun initializeLayout(){
         search = false
+        val sortEditor = getSharedPreferences("SORTING", MODE_PRIVATE)
+        sortOrder = sortEditor.getInt("sortOrder", 0)
         MusicListMA = getAllAudio()
         binding.musicRV.setHasFixedSize(true)
         binding.musicRV.setItemViewCacheSize(13)
         binding.musicRV.layoutManager = LinearLayoutManager(this@MainActivity)
         musicAdapter = MusicAdapter(this@MainActivity, MusicListMA)
         binding.musicRV.adapter = musicAdapter
-        binding.totalSongs.text = "All Songs: " + musicAdapter.itemCount
+        binding.totalSongs.text  = "Total Songs : "+musicAdapter.itemCount
+
+        //for refreshing layout on swipe from top
+        binding.refreshLayout.setOnRefreshListener {
+            MusicListMA = getAllAudio()
+            musicAdapter.updateMusicList(MusicListMA)
+
+            binding.refreshLayout.isRefreshing = false
+        }
     }
 
     @SuppressLint("Recycle")
@@ -242,12 +261,17 @@ class MainActivity : AppCompatActivity() {
     //        putString("FavoriteSongs", jsonString)
     //    }
     //old code
-          val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
-          val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
-          editor.putString("FavoriteSongs", jsonString)
-          editor.apply()
+        val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
+        val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
+        editor.putString("FavoriteSongs", jsonString)
+
+        val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlaylist)
+        editor.putString("MusicPlaylist", jsonString)
+        editor.apply()
     }
 
+
+    //search function
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_view, menu)
 

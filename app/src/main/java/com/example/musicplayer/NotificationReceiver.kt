@@ -20,6 +20,7 @@ class NotificationReceiver: BroadcastReceiver() {
                     exitApplication()
                 }
             }
+
     }
 
     private fun playMusic(){
@@ -43,12 +44,12 @@ class NotificationReceiver: BroadcastReceiver() {
         PlayerActivity.musicService!!.createMediaPlayer()
         Glide.with(context)
             .load(musicListPA[songPosition].artUri)
-            .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
+            .apply(RequestOptions().placeholder(R.drawable.ei_icon).centerCrop())
             .into(binding.songImgPA)
         PlayerActivity.binding.songNamePA.text = musicListPA[songPosition].title
         Glide.with(context)
             .load(PlayerActivity.musicListPA[PlayerActivity.songPosition].artUri)
-            .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
+            .apply(RequestOptions().placeholder(R.drawable.ei_icon).centerCrop())
             .into(NowPlaying.binding.songImgNP)
         NowPlaying.binding.songNameNP.text = PlayerActivity.musicListPA[PlayerActivity.songPosition].title
 

@@ -9,9 +9,9 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgFV"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/song_name"
-        android:padding="5dp"
+        android:scaleType="fitXY"
         android:src="@drawable/yuka_kuromochi"
         app:shapeAppearanceOverlay="@style/curved" />
 

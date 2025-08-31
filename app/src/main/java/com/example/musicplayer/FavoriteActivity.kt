@@ -19,6 +19,7 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        favoriteSongs = checkPlaylist(favoriteSongs)
         //removes header bar
         supportActionBar?.hide()
         //bind the back button eventListener

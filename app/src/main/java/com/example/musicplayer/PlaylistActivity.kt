@@ -24,6 +24,7 @@ class PlaylistActivity : AppCompatActivity() {
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
         //removes header bar
         supportActionBar?.hide()
+        loadPlaylists()
         setContentView(binding.root)
         val tempList = ArrayList<String>()
         binding.playlistRV.setHasFixedSize(true)
@@ -74,6 +75,13 @@ class PlaylistActivity : AppCompatActivity() {
             //    tempPlaylist.createdOn
         }
     }
+
+    override fun onResume(){
+        super.onResume()
+        adapter.notifyDataSetChanged()
+    }
+
+
 
 }
 

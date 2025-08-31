@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:textColor="@color/black"
-        android:text="@string/world_of_music"
+        android:text="Music Player"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_weight="1"
@@ -54,10 +54,10 @@
     <!--Song Image-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id = "@+id/songImgPA"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
-        android:src="@drawable/pyra_splash_screen"
+        android:src="@drawable/ei_icon"
         android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/curved"
         app:strokeColor="@color/cool_blue"

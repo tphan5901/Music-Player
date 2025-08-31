@@ -52,9 +52,9 @@
         android:layout_marginTop="10dp">
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/playlistImgPD"
-            android:layout_width="250dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:src="@drawable/pyra_splash_screen"/>
+            android:src="@drawable/clorinde_icon"/>
         <TextView
             android:id="@+id/moreInfoPD"
             android:layout_width="match_parent"
@@ -72,8 +72,8 @@
         android:id="@+id/playlistDetailsRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="210dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="200dp"
         android:scrollbarThumbVertical="@drawable/scrollbar_icon"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
