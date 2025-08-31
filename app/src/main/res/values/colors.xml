@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cool_blue">#0091EA</color>
-    <color name="cool_pink">#F50057</color>
+    <color name="cool_pink">#EFFB2A7A</color>
     <color name="transparent_gray">#80000000</color>
+    <color name="green">#39D575</color> <!-- material green -->
 
 </resources>

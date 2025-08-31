@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 val data: ArrayList<Music> = GsonBuilder().create().fromJson(jsonString, typeToken)
                 FavoriteActivity.favoriteSongs.addAll(data)
             }
-            /*
+            /* when compiled, doesnt catch error, even tho, this block of code causes app to crash
             PlaylistActivity.musicPlaylist = MusicPlaylist()
             val jsonStringPlaylist = editor.getString("MusicPlaylist", null)
 

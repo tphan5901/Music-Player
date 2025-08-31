@@ -9,7 +9,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgFV"
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:contentDescription="@string/song_name"
         android:scaleType="fitXY"
         android:src="@drawable/yuka_kuromochi"

@@ -87,6 +87,7 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
         musicList = PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist
         notifyDataSetChanged()
     }
+
     private fun sendIntent(ref: String, pos: Int){
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("index", pos)

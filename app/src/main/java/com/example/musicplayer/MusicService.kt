@@ -37,6 +37,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
     }
 
 
+    //displays music player on device notification drop down
     fun showNotification(playPauseIcon: Int){
         val intent = Intent(baseContext, MainActivity::class.java)
         val contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
@@ -71,7 +72,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
         val image = if (imgArt != null) {
             BitmapFactory.decodeByteArray(imgArt, 0, imgArt.size)
         } else {
-            BitmapFactory.decodeResource(resources, R.drawable.pyra_splash_screen)
+            BitmapFactory.decodeResource(resources, R.drawable.ei_icon)
         }
 
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
