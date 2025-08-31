@@ -37,4 +37,5 @@
     <string name="topic_feedback">Topic</string>
     <string name="email_feedback">Email Address</string>
     <string name="send">Send</string>
+    <string name="version_name">Version name</string>
 </resources>

@@ -10,9 +10,9 @@
         android:id="@+id/imageMV"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/pyra_splash_screen"
-        app:shapeAppearanceOverlay="@style/curved"
-        android:layout_marginStart="5dp"/>
+        android:layout_marginStart="5dp"
+        android:src="@drawable/ei_icon"
+        app:shapeAppearanceOverlay="@style/curved" />
 
     <TextView
         android:id="@+id/songNameMV"

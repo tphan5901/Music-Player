@@ -59,7 +59,7 @@ class FeedbackActivity : AppCompatActivity() {
                 Toast.makeText(this, "Thanks For Feedback!!", Toast.LENGTH_SHORT).show()
                 finish()
             }
-            else Toast.makeText(this, "Went Something Wrong!!", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(this, "Please fill out the appropriate fields", Toast.LENGTH_SHORT).show()
         }
     }
 
