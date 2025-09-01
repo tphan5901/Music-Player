@@ -17,11 +17,14 @@ data class Music(val id:String, val title:String, val album:String, val artist:S
 
 }
 
+    //Playlist Data model
     class Playlist{
         lateinit var name: String
         lateinit var playlist: ArrayList<Music>
         lateinit var createdOn: String
-        }
+        var imageUri: String = ""
+    }
+
 
     class MusicPlaylist{
         var ref: ArrayList<Playlist> = ArrayList()
@@ -36,52 +39,51 @@ data class Music(val id:String, val title:String, val album:String, val artist:S
     }
 
 
-fun setSongPosition(increment: Boolean){
-    //if repeat function isnt on
-    if(!PlayerActivity.repeat) {
-        //musicListPA array new position updates to current song position
-        if (increment) {
-            if (PlayerActivity.musicListPA.size - 1 == PlayerActivity.songPosition)
-                //song starts at 0:00
-                PlayerActivity.songPosition = 0
-            else ++PlayerActivity.songPosition
-        } else {
-            if (0 == PlayerActivity.songPosition)
-                PlayerActivity.songPosition = PlayerActivity.musicListPA.size - 1
-            else --PlayerActivity.songPosition
+    fun setSongPosition(increment: Boolean){
+        //if repeat function isnt on
+        if(!PlayerActivity.repeat) {
+            //musicListPA array new position updates to current song position
+            if (increment) {
+                if (PlayerActivity.musicListPA.size - 1 == PlayerActivity.songPosition)
+                    //song starts at 0:00
+                    PlayerActivity.songPosition = 0
+                else ++PlayerActivity.songPosition
+            } else {
+                if (0 == PlayerActivity.songPosition)
+                    PlayerActivity.songPosition = PlayerActivity.musicListPA.size - 1
+                else --PlayerActivity.songPosition
+            }
         }
     }
-}
 
-fun exitApplication(){
-    if(PlayerActivity.musicService != null){
-        PlayerActivity.musicService!!.audioManager.abandonAudioFocus { PlayerActivity.musicService }
-        PlayerActivity.musicService!!.stopForeground(true)
-        PlayerActivity.musicService!!.mediaPlayer!!.release()
-        PlayerActivity.musicService = null }
-    exitProcess(1)
-}
+    fun exitApplication(){
+        if(PlayerActivity.musicService != null){
+            PlayerActivity.musicService!!.audioManager.abandonAudioFocus { PlayerActivity.musicService }
+            PlayerActivity.musicService!!.stopForeground(true)
+            PlayerActivity.musicService!!.mediaPlayer!!.release()
+            PlayerActivity.musicService = null }
+        exitProcess(1)
+    }
 
-fun favoriteChecker(id: String): Int{
-    PlayerActivity.isFavorite = false
-    FavoriteActivity.favoriteSongs.forEachIndexed{ index, music ->
-        if(id == music.id){
-            PlayerActivity.isFavorite = true
-            return index
+    fun favoriteChecker(id: String): Int{
+        PlayerActivity.isFavorite = false
+        FavoriteActivity.favoriteSongs.forEachIndexed{ index, music ->
+            if(id == music.id){
+                PlayerActivity.isFavorite = true
+                return index
+            }
+
         }
-
+        return -1
     }
-    return -1
-}
 
 
-
-fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music> {
-    playlist.forEachIndexed { index, music ->
-        val file = File(music.path)
-        if(!file.exists())
-            playlist.removeAt(index)
+    fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music> {
+        playlist.forEachIndexed { index, music ->
+            val file = File(music.path)
+            if(!file.exists())
+                playlist.removeAt(index)
+        }
+        return playlist
     }
-    return playlist
-}
 

@@ -8,7 +8,6 @@
     android:background="?attr/themeColor"
     android:alpha="0.8">
 
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgNP"
         android:layout_width="70dp"
@@ -28,7 +27,8 @@
         android:background="@null"
         android:src="@drawable/play_icon"
         android:contentDescription="@string/playlist_btn"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        app:tint="@android:color/white" />
 
     <ImageButton
         android:id="@+id/nextBtnNP"
@@ -40,7 +40,8 @@
         android:background="@null"
         android:src="@drawable/next_icon"
         android:contentDescription="@string/playlist_btn"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        app:tint="@android:color/white" />
 
 
     <TextView

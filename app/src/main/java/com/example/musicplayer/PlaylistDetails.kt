@@ -59,12 +59,12 @@ class PlaylistDetails : AppCompatActivity() {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Remove")
                 .setMessage("Do u want to remove all songs?")
+                .setNegativeButton("No"){ dialog, _->
+                    dialog.dismiss()
+                }
                 .setPositiveButton( "Yes"){ dialog, _ ->
                     PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist.clear()
                     adapter.refreshPlaylist()
-                    dialog.dismiss()
-                }
-                .setNegativeButton("No"){ dialog, _->
                     dialog.dismiss()
                 }
             val customDialog = builder.create()

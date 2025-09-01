@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     //    val currentTheme = arrayOf(R.style.coolPink, R.style.coolBlue, R.style.coolPurple, R.style.coolGreen, R.style.coolBlack)
     //    val currentThemeNav = arrayOf(R.style.coolPinkNav, R.style.coolBlueNav, R.style.coolPurpleNav, R.style.coolGreenNav, R.style.coolBlackNav)
-    //    val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_black)
+        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_black)
         var sortOrder: Int = 0
         val sortingList = arrayOf(MediaStore.Audio.Media.DATE_ADDED + " DESC", MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.SIZE + " DESC")
@@ -102,18 +103,17 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navSettings -> startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
 
-
                 R.id.navAbout ->  startActivity(Intent(this@MainActivity, AboutActivity::class.java))
 
                 R.id.navExit -> {
                     val builder = MaterialAlertDialogBuilder(this)
                     builder.setTitle("Exit")
                         .setMessage("Do u want to close app")
-                        .setPositiveButton( "Yes"){_, _ ->
-                            exitApplication()
-                        }
                         .setNegativeButton("No"){ dialog, _->
                             dialog.dismiss()
+                        }
+                        .setPositiveButton( "Yes"){_, _ ->
+                            exitApplication()
                         }
                     val customDialog = builder.create()
                     customDialog.show()
@@ -291,7 +291,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_view, menu)
         //set gradient
-    //    findViewById<LinearLayout>(R.id.linearLayout)?.setBackgroundResource(currentGradient[themeIndex])
+        findViewById<LinearLayout>(R.id.linearLayout)?.setBackgroundResource(currentGradient[themeIndex])
         val item = menu?.findItem(R.id.searchView)
         val searchView = item?.actionView as? androidx.appcompat.widget.SearchView
         searchView?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {

@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
@@ -40,6 +41,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
 
 
     //displays music player on device notification drop down
+    @SuppressLint("SuspiciousIndentation")
     fun showNotification(playPauseIcon: Int) {
         val intent = Intent(baseContext, MainActivity::class.java)
         val contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
@@ -79,7 +81,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
 
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
             .setContentTitle(PlayerActivity.musicListPA[PlayerActivity.songPosition].title)
-            .setContentText(PlayerActivity.musicListPA[PlayerActivity.songPosition].artist)
+        //    .setContentText(PlayerActivity.musicListPA[PlayerActivity.songPosition].artist)
             .setSmallIcon(playPauseIcon)
             .setLargeIcon(image)
             .setStyle(androidx.media.app.NotificationCompat.MediaStyle().setMediaSession(mediaSession.sessionToken))

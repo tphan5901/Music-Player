@@ -9,6 +9,7 @@
     android:layout_margin="10dp"
     app:cardBackgroundColor="@android:color/transparent">
     <!--app:cardBackgroundColor="@android:color/transparent"-->
+    <!--android:backgroundTint="@android:color/transparent"-->
 
     <!--ImageBox-->
     <com.google.android.material.imageview.ShapeableImageView
@@ -18,7 +19,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/song_img"
         android:scaleType="centerCrop"
-        android:src="@drawable/ganyu"
+        android:src="@drawable/ei_icon"
         app:shapeAppearanceOverlay="@style/curved" />
 
     <TextView
@@ -35,6 +36,19 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"/>
 
+    <!-- Edit button -->
+    <ImageButton
+        android:id="@+id/playlistEditBtn"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="130dp"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/playlist_edit"
+        android:src="@drawable/edit_icon"
+        app:tint="?attr/themeColor" />
+
+    <!-- Delete button -->
     <ImageButton
         android:id="@+id/playlistDeleteBtn"
         android:layout_width="37dp"
@@ -46,5 +60,6 @@
         android:contentDescription="@string/playlist_delete"
         android:src="@drawable/delete_icon"
         app:tint="?attr/themeColor" />
+
 
 </com.google.android.material.card.MaterialCardView>
