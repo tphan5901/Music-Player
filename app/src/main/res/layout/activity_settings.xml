@@ -15,7 +15,6 @@
         android:background="@color/white"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:layout_marginTop="2dp"
         android:padding="10dp"/>
 
     <LinearLayout
