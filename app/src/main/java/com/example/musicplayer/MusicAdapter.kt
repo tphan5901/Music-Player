@@ -53,7 +53,7 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
 
         Glide.with(context)
             .load(musicList[position].artUri)
-            .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
+            .apply(RequestOptions().placeholder(R.drawable.clorinde_icon).centerCrop())
             .error(R.drawable.ganyu) // fallback image when no album art found
             .into(holder.image)
         when{

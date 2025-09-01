@@ -56,7 +56,7 @@ class PlaylistViewAdapter(private val context: Context, private var playlistList
         if(PlaylistActivity.musicPlaylist.ref[position].playlist.size > 0){
             Glide.with(context)
                 .load(PlaylistActivity.musicPlaylist.ref[position].playlist[0].artUri)
-                .apply(RequestOptions().placeholder(R.drawable.pyra_splash_screen).centerCrop())
+                .apply(RequestOptions().placeholder(R.drawable.ei_icon).centerCrop())
                 .into(holder.image)
         }
     }
