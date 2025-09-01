@@ -44,11 +44,12 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         // Switch to the app theme BEFORE calling super.onCreate() and setContentView
-        //    setTheme(R.style.Theme_MusicPlayer)
+        setTheme(R.style.Theme_MusicPlayer)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val themeEditor = getSharedPreferences("THEMES", MODE_PRIVATE)
+        themeIndex = themeEditor.getInt("themeIndex", 0)
 
         //nav drawer
         toggle = ActionBarDrawerToggle(this, binding.root, R.string.open, R.string.close)

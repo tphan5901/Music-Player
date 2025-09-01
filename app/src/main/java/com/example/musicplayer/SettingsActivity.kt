@@ -21,22 +21,29 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
         setTheme(R.style.coolPink)
         supportActionBar?.title = "Settings"
+        when(MainActivity.themeIndex){
+    //        0 -> binding.coolPinkTheme.setBackgroundColor(Color.YELLOW)
+            1 -> binding.coolBlueTheme.setBackgroundColor(Color.YELLOW)
+            2 -> binding.coolPurpleTheme.setBackgroundColor(Color.YELLOW)
+            3 -> binding.coolGreenTheme.setBackgroundColor(Color.YELLOW)
+            4 -> binding.coolBlackTheme.setBackgroundColor(Color.YELLOW)
+        }
         binding.coolPinkTheme.setOnClickListener { saveTheme(0) }
         binding.coolBlueTheme.setOnClickListener { saveTheme(1) }
         binding.coolPurpleTheme.setOnClickListener { saveTheme(2) }
         binding.coolGreenTheme.setOnClickListener { saveTheme(3) }
         binding.coolBlackTheme.setOnClickListener { saveTheme(4) }
-
+        binding.versionName.text = getVersionName()
     }
 
     private fun saveTheme(index: Int){
         if(MainActivity.themeIndex != index){
+            val editor = getSharedPreferences("THEMES", MODE_PRIVATE).edit()
+            editor.putInt("themeIndex", index)
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Apply Theme")
                 .setMessage("Do u want to apply this theme?")
                 .setPositiveButton( "Yes"){_, _ ->
-                    val editor = getSharedPreferences("THEMES", MODE_PRIVATE).edit()
-                    editor.putInt("themeIndex", index)
                     exitApplication()
                 }
                 .setNegativeButton("No"){ dialog, _->
@@ -48,5 +55,15 @@ class SettingsActivity : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         }
     }
+
+    private fun getVersionName(): String {
+        return try {
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            "Version Name: ${pInfo.versionName}"
+        } catch (e: Exception) {
+            "Version not found"
+        }
+    }
+
 
 }
