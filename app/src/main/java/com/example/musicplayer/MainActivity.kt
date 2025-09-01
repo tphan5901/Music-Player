@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -271,21 +270,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_view, menu)
 
-        val searchView = menu?.findItem(R.id.searchView)?.actionView as? SearchView
-
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
+        val item = menu?.findItem(R.id.searchView)
+        val searchView = item?.actionView as? androidx.appcompat.widget.SearchView
+        searchView?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = true
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 musicListSearch = ArrayList()
                 if (!newText.isNullOrEmpty()) {
                     val userInput = newText.lowercase()
                     for (song in MusicListMA) {
-                        if (song.title.lowercase().contains(userInput)) {
+                        if (song.title.lowercase().contains(userInput))
                             musicListSearch.add(song)
-                        }
                     }
                     search = true
                     musicAdapter.updateMusicList(searchList = musicListSearch)
@@ -296,6 +292,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
         return super.onCreateOptionsMenu(menu)
     }
 
