@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var MusicListMA : ArrayList<Music>
         lateinit var musicListSearch : ArrayList<Music>
         var search: Boolean = false
-
         var sortOrder: Int = 0
+        var themeIndex: Int = 0
     }
 
 
@@ -57,26 +57,23 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if(requestRuntimePermission()) {
+        if(requestRuntimePermission()){
             initializeLayout()
-            // storing favorites data
+            //for retrieving favourites data using shared preferences
             FavoriteActivity.favoriteSongs = ArrayList()
-            val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE)
-            val jsonString = editor.getString("FavoriteSongs", null)
+            val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE)
+            val jsonString = editor.getString("FavouriteSongs", null)
             val typeToken = object : TypeToken<ArrayList<Music>>(){}.type
             if(jsonString != null){
                 val data: ArrayList<Music> = GsonBuilder().create().fromJson(jsonString, typeToken)
                 FavoriteActivity.favoriteSongs.addAll(data)
             }
-            /* when compiled, doesnt catch error, even tho, this block of code causes app to crash
             PlaylistActivity.musicPlaylist = MusicPlaylist()
             val jsonStringPlaylist = editor.getString("MusicPlaylist", null)
-
             if(jsonStringPlaylist != null){
                 val dataPlaylist: MusicPlaylist = GsonBuilder().create().fromJson(jsonStringPlaylist, MusicPlaylist::class.java)
                 PlaylistActivity.musicPlaylist = dataPlaylist
             }
-            */
         }
 
         binding.shuffleBtn.setOnClickListener {
@@ -261,12 +258,11 @@ class MainActivity : AppCompatActivity() {
     //        putString("FavoriteSongs", jsonString)
     //    }
     //old code
-        val editor = getSharedPreferences("FAVORITES", MODE_PRIVATE).edit()
+        val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
         val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)
-        editor.putString("FavoriteSongs", jsonString)
-
+        editor.putString("FavouriteSongs", jsonString)
         val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlaylist)
-        editor.putString("MusicPlaylist", jsonString)
+        editor.putString("MusicPlaylist", jsonStringPlaylist)
         editor.apply()
     }
 

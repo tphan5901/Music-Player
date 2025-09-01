@@ -17,6 +17,7 @@ class PlaylistActivity : AppCompatActivity() {
 
     companion object{
         var musicPlaylist: MusicPlaylist = MusicPlaylist()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
