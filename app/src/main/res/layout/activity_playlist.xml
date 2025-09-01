@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="UnknownId" />
 
-    <!--floating add plyalist btn-->
+    <!--floating add playlist btn-->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/addPlaylistBtn"
         android:layout_width="wrap_content"
@@ -90,7 +90,6 @@
         android:contentDescription="@string/favorites_btn"
         app:icon="@drawable/add_icon"
         app:iconSize="35dp"
-        app:iconTint="@color/cool_pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
@@ -98,6 +97,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:strokeColor="@color/cool_pink"
+        app:iconTint="@color/cool_pink"
         app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
