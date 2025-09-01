@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <attr name ="themeColor" format="color"/>
+
     <!-- Base application theme -->
     <style name="Theme.MusicPlayer" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="themeColor">@color/cool_pink</item>
+
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

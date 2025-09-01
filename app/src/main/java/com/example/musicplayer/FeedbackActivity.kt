@@ -56,7 +56,7 @@ class FeedbackActivity : AppCompatActivity() {
                         Transport.send(mail)
                     }catch (e: Exception){Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()}
                 }.start()
-                Toast.makeText(this, "Thanks For Feedback!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Thanks for the feedback!!", Toast.LENGTH_SHORT).show()
                 finish()
             }
             else Toast.makeText(this, "Please fill out the appropriate fields", Toast.LENGTH_SHORT).show()

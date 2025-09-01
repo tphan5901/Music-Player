@@ -20,7 +20,6 @@ class NotificationReceiver: BroadcastReceiver() {
                     exitApplication()
                 }
             }
-
     }
 
     private fun playMusic(){

@@ -66,8 +66,7 @@
                 android:drawableTop="@drawable/playlist_icon"
                 android:text="@string/playlist_btn"
                 android:textColor="@color/black"
-                android:textAllCaps="false"
-                />
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

@@ -75,7 +75,7 @@ class PlaylistDetails : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         binding.playlistNamePD.text = PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].name
-        binding.moreInfoPD.text = "Total ${adapter.itemCount} Songs.\n\n" +
+        binding.moreInfoPD.text = "Total Songs: ${adapter.itemCount} \n\n" +
                 "Created On:\n${PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].createdOn}\n\n"
         if(adapter.itemCount > 0)
         {
@@ -86,7 +86,7 @@ class PlaylistDetails : AppCompatActivity() {
             binding.shuffleBtnPD.visibility = View.VISIBLE
         }
         adapter.notifyDataSetChanged()
-        //for storing favourites data using shared preferences
+        //for storing favorite songs using shared preferences
         getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit {
             val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlaylist)
             putString("MusicPlaylist", jsonStringPlaylist)
