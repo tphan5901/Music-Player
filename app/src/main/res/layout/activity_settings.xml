@@ -65,7 +65,6 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/white"
-        android:paddingHorizontal="16dp"
         android:layout_marginVertical="2dp">
         <TextView
             android:layout_width="0dp"
@@ -76,15 +75,17 @@
             android:textColor="@color/black"
             android:gravity="center|start"
             android:layout_weight="1"
-            android:paddingStart="5dp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingStart="10dp" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/sortBtn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:src="@drawable/sort_icon"
             android:tint="@color/cool_pink"
-            android:padding="5dp"/>
+            android:paddingEnd="10dp"/>
+
     </LinearLayout>
 
     <TextView
