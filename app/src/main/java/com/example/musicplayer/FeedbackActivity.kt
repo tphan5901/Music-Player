@@ -22,7 +22,7 @@ class FeedbackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.coolPink)
+    //    setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)

@@ -8,8 +8,10 @@ import android.media.AudioManager
 import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import android.os.Looper
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
@@ -38,7 +40,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
 
 
     //displays music player on device notification drop down
-    fun showNotification(playPauseIcon: Int){
+    fun showNotification(playPauseIcon: Int) {
         val intent = Intent(baseContext, MainActivity::class.java)
         val contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
@@ -89,7 +91,16 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             .addAction(R.drawable.next_icon, "Next", nextPendingIntent)
             .addAction(R.drawable.exit_icon, "Exit", exitPendingIntent)
             .build()
-        startForeground(13, notification)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                mediaSession.setMetadata(
+                    MediaMetadataCompat.Builder().putLong(
+                        MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong()
+                    ).build()
+                )
+            }
+
+            startForeground(13, notification)
 
     }
 
@@ -148,14 +159,14 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
     override fun onAudioFocusChange(focusChange: Int) {
         if(focusChange <= 0){
             PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
-            NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.play_icon)
+            NowPlaying.binding.playPauseBtnNP.setImageResource(R.drawable.play_icon)
             showNotification(R.drawable.play_icon)
             PlayerActivity.isPlaying = false
             mediaPlayer!!.pause()
 
         }else{
             PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
-            NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.pause_icon)
+            NowPlaying.binding.playPauseBtnNP.setImageResource(R.drawable.pause_icon)
             showNotification(R.drawable.pause_icon)
             PlayerActivity.isPlaying = true
             mediaPlayer!!.pause()

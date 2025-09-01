@@ -13,13 +13,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.FragmentNowPlayingBinding
 
 class NowPlaying : Fragment() {
+
     companion object{
         @SuppressLint("StaticFieldLeak")
         lateinit var binding: FragmentNowPlayingBinding
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-   //     requireContext().theme.applyStyle(MainActivity.currentTheme[MainActivity.themeIndex], true)
+    //    requireContext().theme.applyStyle(MainActivity.currentTheme[MainActivity.themeIndex], true)
         val view = inflater.inflate(R.layout.fragment_now_playing, container, false)
         binding = FragmentNowPlayingBinding.bind(view)
         binding.root.visibility = View.INVISIBLE
@@ -56,22 +57,21 @@ class NowPlaying : Fragment() {
                 .apply(RequestOptions().placeholder(R.drawable.ei_icon).centerCrop())
                 .into(binding.songImgNP)
             binding.songNameNP.text = PlayerActivity.musicListPA[PlayerActivity.songPosition].title
-            if(PlayerActivity.isPlaying) binding.playPauseBtnNP.setIconResource(R.drawable.pause_icon)
-            else binding.playPauseBtnNP.setIconResource(R.drawable.play_icon)
+            if(PlayerActivity.isPlaying) binding.playPauseBtnNP.setImageResource(R.drawable.pause_icon)
+            else binding.playPauseBtnNP.setImageResource(R.drawable.play_icon)
         }
     }
 
     private fun playMusic(){
         PlayerActivity.isPlaying = true
         PlayerActivity.musicService!!.mediaPlayer!!.start()
-        binding.playPauseBtnNP.setIconResource(R.drawable.pause_icon)
+        binding.playPauseBtnNP.setImageResource(R.drawable.pause_icon)
         PlayerActivity.musicService!!.showNotification(R.drawable.pause_icon)
     }
     private fun pauseMusic(){
         PlayerActivity.isPlaying = false
         PlayerActivity.musicService!!.mediaPlayer!!.pause()
-        binding.playPauseBtnNP.setIconResource(R.drawable.play_icon)
+        binding.playPauseBtnNP.setImageResource(R.drawable.play_icon)
         PlayerActivity.musicService!!.showNotification(R.drawable.play_icon)
     }
-
 }

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NowPlaying"
-    android:background="@color/cool_pink">
+    android:background="?attr/themeColor"
+    android:alpha="0.8">
 
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -15,31 +16,32 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
         app:shapeAppearanceOverlay="@style/curved"
-        android:src="@drawable/pyra_splash_screen"/>
+        android:src="@drawable/ei_icon"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/nextBtnNP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        app:icon="@drawable/next_icon"
-        android:backgroundTint="@color/cool_pink"
-        android:layout_centerVertical="true"
-        app:iconSize="40dp"
-        android:layout_marginEnd="10dp"
-        android:contentDescription="@string/playlist_btn"/>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <ImageButton
         android:id="@+id/playPauseBtnNP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:icon="@drawable/play_icon"
-        android:backgroundTint="@color/cool_pink"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
-        app:iconSize="40dp"
         android:layout_toStartOf="@id/nextBtnNP"
         android:layout_marginHorizontal="5dp"
-        android:contentDescription="@string/playlist_btn"/>
+        android:background="@null"
+        android:src="@drawable/play_icon"
+        android:contentDescription="@string/playlist_btn"
+        android:scaleType="centerInside"/>
+
+    <ImageButton
+        android:id="@+id/nextBtnNP"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@null"
+        android:src="@drawable/next_icon"
+        android:contentDescription="@string/playlist_btn"
+        android:scaleType="centerInside"/>
+
 
     <TextView
         android:id="@+id/songNameNP"

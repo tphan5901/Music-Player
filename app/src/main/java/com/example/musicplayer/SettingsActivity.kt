@@ -14,19 +14,19 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    //    setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
         enableEdgeToEdge()
 
         // Initialize binding first
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setTheme(R.style.coolPink)
         supportActionBar?.title = "Settings"
         when(MainActivity.themeIndex){
-    //        0 -> binding.coolPinkTheme.setBackgroundColor(Color.YELLOW)
-            1 -> binding.coolBlueTheme.setBackgroundColor(Color.YELLOW)
-            2 -> binding.coolPurpleTheme.setBackgroundColor(Color.YELLOW)
-            3 -> binding.coolGreenTheme.setBackgroundColor(Color.YELLOW)
-            4 -> binding.coolBlackTheme.setBackgroundColor(Color.YELLOW)
+            0 -> binding.coolPinkTheme.setBackgroundColor(Color.WHITE)
+            1 -> binding.coolBlueTheme.setBackgroundColor(Color.WHITE)
+            2 -> binding.coolPurpleTheme.setBackgroundColor(Color.WHITE)
+            3 -> binding.coolGreenTheme.setBackgroundColor(Color.WHITE)
+            4 -> binding.coolBlackTheme.setBackgroundColor(Color.WHITE)
         }
         binding.coolPinkTheme.setOnClickListener { saveTheme(0) }
         binding.coolBlueTheme.setOnClickListener { saveTheme(1) }
@@ -34,6 +34,26 @@ class SettingsActivity : AppCompatActivity() {
         binding.coolGreenTheme.setOnClickListener { saveTheme(3) }
         binding.coolBlackTheme.setOnClickListener { saveTheme(4) }
         binding.versionName.text = getVersionName()
+        binding.sortBtn.setOnClickListener {
+            val menuList = arrayOf("Recently Added", "Song Title", "File Size")
+            var currentSort = MainActivity.sortOrder
+            val builder = MaterialAlertDialogBuilder(this)
+
+            builder.setTitle("Sorting")
+                .setPositiveButton( "OK"){ _, _ ->
+                    val editor = getSharedPreferences("SORTING", MODE_PRIVATE).edit()
+                    editor.putInt("sortOrder", currentSort)
+                    editor.apply()
+                }
+                .setSingleChoiceItems(menuList, currentSort) { _,which  ->
+                    currentSort = which
+                }
+
+            val customDialog = builder.create()
+            customDialog.show()
+            customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+
+        }
     }
 
     private fun saveTheme(index: Int){
