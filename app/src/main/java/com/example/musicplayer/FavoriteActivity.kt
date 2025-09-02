@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityFavoriteBinding
 
 class FavoriteActivity : AppCompatActivity() {
@@ -53,6 +56,27 @@ class FavoriteActivity : AppCompatActivity() {
         }
         return -1
     }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
+        val bgUri = sharedPref.getString("bg_uri", null)
+
+        if (bgUri != null && bgUri.isNotEmpty()) {
+            Glide.with(this)
+                .load(bgUri.toUri())
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.clorinde_icon)
+                        .centerCrop()
+                )
+                .into(binding.bgImage)
+        } else {
+            binding.bgImage.setImageResource(R.drawable.clorinde_icon)
+        }
+    }
+
+
 
 }
 

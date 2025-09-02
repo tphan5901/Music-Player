@@ -72,7 +72,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
         )
 
         val music = PlayerActivity.musicListPA[PlayerActivity.songPosition]
-        val imgArt = music.getImgArt(music.path)
+        val imgArt = music.getImgArt()
         val image = if (imgArt != null) {
             BitmapFactory.decodeByteArray(imgArt, 0, imgArt.size)
         } else {

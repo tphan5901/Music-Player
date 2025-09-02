@@ -1,10 +1,15 @@
 package com.example.musicplayer
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.example.musicplayer.databinding.ActivitySettingsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -12,6 +17,8 @@ class SettingsActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySettingsBinding
 
+
+    @SuppressLint("IntentReset")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     //    setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
@@ -54,6 +61,12 @@ class SettingsActivity : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
 
         }
+        binding.selectBgImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.type = "image/*"
+            startActivityForResult(intent, 101) // requestCode = 101
+        }
+
     }
 
     private fun saveTheme(index: Int){
@@ -82,6 +95,22 @@ class SettingsActivity : AppCompatActivity() {
             "Version Name: ${pInfo.versionName}"
         } catch (e: Exception) {
             "Version not found"
+        }
+    }
+
+    //set background image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            if (selectedImageUri != null) {
+                // Save URI string to SharedPreferences
+                getSharedPreferences("BG_IMAGE", MODE_PRIVATE).edit {
+                    putString("bg_uri", selectedImageUri.toString())
+                }
+
+                Toast.makeText(this, "Background image set!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
