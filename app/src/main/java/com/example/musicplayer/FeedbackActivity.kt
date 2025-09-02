@@ -29,14 +29,19 @@ class FeedbackActivity : AppCompatActivity() {
         supportActionBar?.title = "Feedback"
         val feedbackMsg = binding.feedbackMsgFA.text.toString() + "\n" + binding.emailFA.text.toString()
         val subject = binding.topicFA.text.toString()
-        binding.sendFA.setOnClickListener @androidx.annotation.RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE) {
-            val feedbackMsg = binding.feedbackMsgFA.text.toString() + "\n" + binding.emailFA.text.toString()
+        binding.sendFA.setOnClickListener {
+            val feedbackMsg = """
+        Topic: ${binding.topicFA.text}
+        User: ${binding.emailFA.text}
+        Feedback: ${binding.feedbackMsgFA.text}""".trimIndent()
+
             val subject = binding.topicFA.text.toString()
             val userName = "turfycrab@gmail.com"
-            val pass = ""
+            val pass = "eqgv fqmr libh yddt"
             val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
             if(feedbackMsg.isNotEmpty() && subject.isNotEmpty() && (cm.activeNetworkInfo?.isConnectedOrConnecting == true)){
-                Thread{
+                Thread {
                     try {
                         val properties = Properties()
                         properties["mail.smtp.auth"] = "true"
@@ -54,13 +59,17 @@ class FeedbackActivity : AppCompatActivity() {
                         mail.setFrom(InternetAddress(userName))
                         mail.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userName))
                         Transport.send(mail)
-                    }catch (e: Exception){Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()}
+                    } catch (e: Exception){
+                        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+                    }
                 }.start()
                 Toast.makeText(this, "Thanks for the feedback!!", Toast.LENGTH_SHORT).show()
                 finish()
+            } else {
+                Toast.makeText(this, "Please fill out the appropriate fields", Toast.LENGTH_SHORT).show()
             }
-            else Toast.makeText(this, "Please fill out the appropriate fields", Toast.LENGTH_SHORT).show()
         }
+
     }
 
 }

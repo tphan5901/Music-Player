@@ -140,7 +140,7 @@
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
     //new dark Theme
-    <style name="coolBlack" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="coolBlack" parent="Theme.MaterialComponents.DayNight.NoActionBar">;
         <item name="themeColor">@color/black</item>
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/black</item>

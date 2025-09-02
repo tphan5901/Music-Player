@@ -6,6 +6,7 @@ plugins {
 
 }
 
+
 android {
     namespace = "com.example.musicplayer"
     compileSdk = 36
@@ -41,7 +42,20 @@ android {
         viewBinding = true
     }
 
+    // Add this to ignore duplicate META-INF files
+    packagingOptions {
+        resources {
+            excludes += listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt"
+            )
+        }
+    }
 }
+
 
 dependencies {
 
@@ -62,6 +76,15 @@ dependencies {
 
     // for Notification
     implementation("androidx.media:media:1.3.1")
+
+    //google gmail api
+// Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+// Google API Client (for Android)
+    implementation("com.google.api-client:google-api-client-android:1.34.1")
+    implementation("com.google.api-client:google-api-client-gson:1.34.1")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

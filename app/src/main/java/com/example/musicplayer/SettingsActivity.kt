@@ -61,13 +61,13 @@ class SettingsActivity : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
 
         }
-        // old code causing bug [ACTION_PICK] where bg image selected does not display in other activities
+        // old code causing bug [ACTION_PICK] where bg image selected does not display in other activities.xml
+        // btw this bug doesn't register as error when compiled
        // binding.selectBgImage.setOnClickListener {
        //     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
       //      intent.type = "image/*"
      //       startActivityForResult(intent, 101) // requestCode = 101
      //   }
-
 
         // background image picker
         binding.selectBgImage.setOnClickListener {
@@ -110,7 +110,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     //set background image
-    // save background image URI
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
