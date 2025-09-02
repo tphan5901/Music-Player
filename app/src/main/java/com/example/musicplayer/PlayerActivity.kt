@@ -200,7 +200,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             musicService!!.mediaPlayer!!.start()
             isPlaying = true
             binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
-            musicService!!.showNotification(R.drawable.pause_icon)
+            musicService!!.showNotification(R.drawable.pause_icon) //1F
             binding.tvSeekBarStart.text =
                 DateUtils.formatElapsedTime(musicService!!.mediaPlayer!!.currentPosition.toLong() / 1000)
             binding.tvSeekBarEnd.text =
@@ -308,7 +308,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     private fun playMusic() {
         binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
         //uncommenting this line causes errors
-        musicService!!.showNotification(R.drawable.pause_icon)
+        musicService!!.showNotification(R.drawable.pause_icon) //1F
         isPlaying = true
         musicService!!.mediaPlayer!!.start()
     }
@@ -316,7 +316,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     private fun pauseMusic() {
         binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
         //uncommenting this line causes errors
-        musicService!!.showNotification(R.drawable.play_icon)
+        musicService!!.showNotification(R.drawable.play_icon) //0F
         isPlaying = false
         musicService!!.mediaPlayer!!.pause()
     }

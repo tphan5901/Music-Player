@@ -14,6 +14,7 @@ import android.os.IBinder
 import android.os.Looper
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
 //import androidx.media.app.NotificationCompat
@@ -94,11 +95,12 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             .build()
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                mediaSession.setMetadata(
-                    MediaMetadataCompat.Builder().putLong(
-                        MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong()
-                    ).build()
-                )
+                mediaSession.setMetadata(MediaMetadataCompat.Builder()
+                    .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong())
+                    .build())
+                mediaSession.setPlaybackState(PlaybackStateCompat.Builder()
+            //        .setState(PlaybackStateCompat.STATE_PLAYING, mediaPlayer!!.currentPosition.toLong(), playbackSpeed)
+                    .build())
             }
 
             startForeground(13, notification)
@@ -127,7 +129,7 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             mediaPlayer?.prepare()
 
             PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
-            showNotification(R.drawable.pause_icon)
+            showNotification(R.drawable.pause_icon) //0F
             PlayerActivity.binding.tvSeekBarStart.text =
                 formatDuration(mediaPlayer!!.currentPosition.toLong())
             PlayerActivity.binding.tvSeekBarEnd.text =
@@ -161,14 +163,14 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
         if(focusChange <= 0){
             PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.play_icon)
             NowPlaying.binding.playPauseBtnNP.setImageResource(R.drawable.play_icon)
-            showNotification(R.drawable.play_icon)
+            showNotification(R.drawable.play_icon) //0F
             PlayerActivity.isPlaying = false
             mediaPlayer!!.pause()
 
         }else{
             PlayerActivity.binding.playPauseBtnPA.setImageResource(R.drawable.pause_icon)
             NowPlaying.binding.playPauseBtnNP.setImageResource(R.drawable.pause_icon)
-            showNotification(R.drawable.pause_icon)
+            showNotification(R.drawable.pause_icon) //1F
             PlayerActivity.isPlaying = true
             mediaPlayer!!.pause()
         }
