@@ -417,7 +417,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         dialog.show()
     }
 
-
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun getMusicDetails(contentUri: Uri): Music{
         var cursor: Cursor? = null

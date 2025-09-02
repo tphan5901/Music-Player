@@ -21,7 +21,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
@@ -261,6 +264,23 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onResume(){
         super.onResume()
+
+        val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
+        val bgUri = sharedPref.getString("bg_uri", null)
+
+        if (bgUri != null && bgUri.isNotEmpty()) {
+            Glide.with(this)
+                .load(bgUri.toUri())
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.ganyu)
+                        .centerCrop()
+                )
+                .into(binding.bgImage)
+        } else {
+            binding.bgImage.setImageResource(R.drawable.ganyu)
+        }
+
         // storing favorites data
     //    getSharedPreferences("FAVORITES", MODE_PRIVATE).edit {
     //        val jsonString = GsonBuilder().create().toJson(FavoriteActivity.favoriteSongs)

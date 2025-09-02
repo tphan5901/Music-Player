@@ -37,7 +37,7 @@
             android:src="@drawable/back_icon"
             android:contentDescription="@string/back_btn"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@android:color/white"
+            app:tint="@android:color/black"
             android:padding="5dp"/>
 
         <TextView
@@ -46,7 +46,7 @@
             android:contentDescription="@string/favorites_btn"
             android:gravity="center"
             android:text="@string/favorites_btn"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"/>
 

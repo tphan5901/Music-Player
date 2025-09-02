@@ -61,10 +61,21 @@ class SettingsActivity : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
 
         }
+        // old code causing bug [ACTION_PICK] where bg image selected does not display in other activities
+       // binding.selectBgImage.setOnClickListener {
+       //     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+      //      intent.type = "image/*"
+     //       startActivityForResult(intent, 101) // requestCode = 101
+     //   }
+
+
+        // background image picker
         binding.selectBgImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            intent.type = "image/*"
-            startActivityForResult(intent, 101) // requestCode = 101
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+                type = "image/*"
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+            }
+            startActivityForResult(intent, 101)
         }
 
     }
@@ -99,12 +110,22 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     //set background image
+    // save background image URI
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
             val selectedImageUri = data.data
             if (selectedImageUri != null) {
-                // Save URI string to SharedPreferences
+                try {
+                    // persist permission so URI can be used later
+                    contentResolver.takePersistableUriPermission(
+                        selectedImageUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (e: SecurityException) {
+                    e.printStackTrace()
+                }
+
                 getSharedPreferences("BG_IMAGE", MODE_PRIVATE).edit {
                     putString("bg_uri", selectedImageUri.toString())
                 }
