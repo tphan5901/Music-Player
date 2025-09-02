@@ -46,7 +46,7 @@ class SettingsActivity : AppCompatActivity() {
             var currentSort = MainActivity.sortOrder
             val builder = MaterialAlertDialogBuilder(this)
 
-            builder.setTitle("Sorting")
+            builder.setTitle("Sort by")
                 .setPositiveButton( "OK"){ _, _ ->
                     val editor = getSharedPreferences("SORTING", MODE_PRIVATE).edit()
                     editor.putInt("sortOrder", currentSort)
@@ -92,7 +92,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun getVersionName(): String {
         return try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
-            "Version Name: ${pInfo.versionName}"
+            "Software Version: ${pInfo.versionName}"
         } catch (e: Exception) {
             "Version not found"
         }

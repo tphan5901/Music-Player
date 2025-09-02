@@ -37,8 +37,9 @@
     <string name="topic_feedback">Topic</string>
     <string name="email_feedback">Email Address</string>
     <string name="send">Send</string>
-    <string name="version_name">Version name</string>
+    <string name="version_name">Software Version</string>
     <string name="set_theme">Set Theme</string>
     <string name="sort_by">Sort By</string>
     <string name="playlist_edit">Edit Playlist</string>
+    <string name="color_palette">Color Palette</string>
 </resources>

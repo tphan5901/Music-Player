@@ -16,9 +16,8 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
-
-
 //import androidx.media.app.NotificationCompat
+
 
 class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
     private var myBinder = MyBinder()

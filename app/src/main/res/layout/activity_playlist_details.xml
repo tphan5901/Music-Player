@@ -114,25 +114,23 @@
             android:id="@+id/addBtnPD"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:contentDescription="@string/add_song"
             android:drawableTop="@drawable/add_icon"
-            android:text="@string/add_song"
             android:textAllCaps="false"
             android:textColor="?colorOnPrimary"
             tools:ignore="RtlHardcoded" />
 
-        <!--Remove Button-->
+        <!--Sub Button-->
         <Button
             android:id="@+id/removeAllPD"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:contentDescription="@string/remove_all"
             android:drawableTop="@drawable/remove_icon"
-            android:text="@string/remove_all"
             android:textAllCaps="false"
             android:textColor="?colorOnPrimary"
             tools:ignore="RtlHardcoded" />
