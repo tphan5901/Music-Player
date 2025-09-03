@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.MusicViewBinding
 
-class MusicAdapter(private val context: Context, private var musicList: ArrayList<Music>, private var playlistDetails: Boolean = false,
+class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>, private var playlistDetails: Boolean = false,
                    private val selectionActivity: Boolean = false)
     : RecyclerView.Adapter<MusicAdapter.MyHolder>() {
     class MyHolder(binding: MusicViewBinding) : RecyclerView.ViewHolder(binding.root){
@@ -106,6 +106,11 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
         }
         PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist.add(song)
         return true
+    }
+
+    fun deleteItem(position: Int) {
+        musicList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 

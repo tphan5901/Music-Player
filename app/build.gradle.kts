@@ -78,10 +78,10 @@ dependencies {
     implementation("androidx.media:media:1.3.1")
 
     //google gmail api
-// Google Sign-In
     implementation("com.google.android.gms:play-services-auth:20.7.0")
 
-// Google API Client (for Android)
+
+    // Google API Client (for Android)
     implementation("com.google.api-client:google-api-client-android:1.34.1")
     implementation("com.google.api-client:google-api-client-gson:1.34.1")
 

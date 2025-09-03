@@ -54,7 +54,7 @@
 
     </LinearLayout>
 
-    <!-- RecyclerView for favorite items -->
+    <!-- recyclerview for song items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectionRV"
         android:layout_width="match_parent"

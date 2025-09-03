@@ -9,7 +9,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityPlaylistDetailsBinding
@@ -73,7 +75,40 @@ class PlaylistDetails : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
 
         }
+
+        val itemTouchHelper = ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+
+                // Reset swipe immediately so the item stays visible
+                adapter.notifyItemChanged(position)
+
+                AlertDialog.Builder(this@PlaylistDetails)
+                    .setTitle("Delete Song")
+                    .setMessage("Do you want to delete this song?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        // Delete from playlist + refresh
+                        adapter.deleteItem(position)
+                        PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist =
+                            adapter.musicList
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+        })
+            itemTouchHelper.attachToRecyclerView(binding.playlistDetailsRV)
+
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun onResume() {

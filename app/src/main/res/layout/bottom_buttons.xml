@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:gravity="center"
+    android:padding="5dp">
+
+    <Button
+        android:id="@+id/shuffleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/shuffle_icon"
+        android:text="@string/shuffle_btn"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    <Button
+        android:id="@+id/favoriteBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/favorite_icon"
+        android:text="@string/favorites_btn"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    <Button
+        android:id="@+id/playlistBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/playlist_icon"
+        android:text="@string/playlist_btn"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+</LinearLayout>
