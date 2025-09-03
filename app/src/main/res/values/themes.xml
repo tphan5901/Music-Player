@@ -22,6 +22,7 @@
 
         <!-- Status bar -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
     </style>
 
     <!-- Splash screen theme -->

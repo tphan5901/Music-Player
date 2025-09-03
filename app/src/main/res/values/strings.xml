@@ -3,7 +3,7 @@
     <string name="shuffle_btn">Shuffle</string>
     <string name="playlist_btn">Playlist</string>
     <string name="favorites_btn">Favorites</string>
-    <string name="total_song">All Songs</string>
+    <string name="song_list">Song List</string>
     <string name="title_activity_player">PlayerActivity</string>
     <string name="world_of_music">World Of Music</string>
     <string name="song_name">Song name</string>

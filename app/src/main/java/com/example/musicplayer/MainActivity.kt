@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         binding.musicRV.layoutManager = LinearLayoutManager(this@MainActivity)
         musicAdapter = MusicAdapter(this@MainActivity, MusicListMA)
         binding.musicRV.adapter = musicAdapter
-        binding.totalSongs.text  = "Total Songs : "+musicAdapter.itemCount
+        binding.totalSongs.text  = "Song List : " + musicAdapter.itemCount
 
         //for refreshing layout on swipe from top
         binding.refreshLayout.setOnRefreshListener {

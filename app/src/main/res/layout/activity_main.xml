@@ -26,12 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Total songs -->
+            <!-- Song List -->
             <TextView
                 android:id="@+id/totalSongs"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/total_song"
+                android:text="@string/song_list"
                 android:textColor="@color/black"
                 android:layout_margin="10dp"
                 android:paddingBottom="10dp"
