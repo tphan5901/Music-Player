@@ -16,10 +16,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/kanna_icon_foreground"
+        android:icon="@mipmap/music_icon_foreground"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/kanna_icon_round"
+        android:roundIcon="@mipmap/music_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer">
         <activity
