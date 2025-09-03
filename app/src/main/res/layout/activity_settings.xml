@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity"
-    android:orientation="vertical"
-    android:background="@color/black">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -82,29 +81,21 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:src="@drawable/sort_icon"
-            android:tint="@color/cool_pink"
+            android:tint="@color/black"
             android:paddingEnd="10dp"/>
 
     </LinearLayout>
-F
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
 
-        <com.google.android.material.button.MaterialButton
+
+        <Button
             android:id="@+id/selectBgImage"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Background Image"
-            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Background"
+            android:textColor="@color/white"
             android:textSize="15sp"
-            android:backgroundTint="@color/white"
-            android:gravity="start|center_vertical"
-            android:padding="10dp" />
-
-    </LinearLayout>
+            android:backgroundTint="@color/green"
+           />
 
 
     <TextView
