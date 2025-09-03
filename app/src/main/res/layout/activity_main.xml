@@ -5,19 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <ImageView
         android:id="@+id/bgImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/ganyu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:adjustViewBounds="true"/>
+
 
     <!--    for refreshing layout on swipe from top-->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

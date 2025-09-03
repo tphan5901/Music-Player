@@ -14,9 +14,9 @@ import android.os.IBinder
 import android.os.Looper
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import android.text.format.DateUtils
 import androidx.core.app.NotificationCompat
+
 //import androidx.media.app.NotificationCompat
 
 
@@ -94,13 +94,15 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             .addAction(R.drawable.exit_icon, "Exit", exitPendingIntent)
             .build()
 
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                mediaSession.setMetadata(MediaMetadataCompat.Builder()
-                    .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong())
-                    .build())
-                mediaSession.setPlaybackState(PlaybackStateCompat.Builder()
-            //        .setState(PlaybackStateCompat.STATE_PLAYING, mediaPlayer!!.currentPosition.toLong(), playbackSpeed)
-                    .build())
+
+                mediaSession.setMetadata(
+                    MediaMetadataCompat.Builder().putLong(
+                        MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong()
+                    ).build()
+                )
+
             }
 
             startForeground(13, notification)
