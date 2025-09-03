@@ -230,7 +230,9 @@ class MainActivity : AppCompatActivity() {
             projection,
             selection,
             null,
-            MediaStore.Audio.Media.DATE_ADDED + " DESC"
+        //    line of code below causes sort option selected from settings activity to not function in main
+        //    MediaStore.Audio.Media.DATE_ADDED + " DESC"
+            MainActivity.sortingList[MainActivity.sortOrder]
         )
 
         if (cursor != null && cursor.moveToFirst()) {

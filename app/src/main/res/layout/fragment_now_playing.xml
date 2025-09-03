@@ -28,7 +28,7 @@
         android:src="@drawable/play_icon"
         android:contentDescription="@string/playlist_btn"
         android:scaleType="centerInside"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/black" />
 
     <ImageButton
         android:id="@+id/nextBtnNP"
@@ -41,7 +41,7 @@
         android:src="@drawable/next_icon"
         android:contentDescription="@string/playlist_btn"
         android:scaleType="centerInside"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/black" />
 
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_height="60dp"
         android:text="@string/song_name"
         android:textSize="18sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_toStartOf="@id/playPauseBtnNP"
