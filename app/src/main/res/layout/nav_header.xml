@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayoutNav"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:padding="16dp"
+    android:layout_height="160dp"
+    android:padding="15dp"
     android:background="@color/black"
     android:orientation="vertical">
 
@@ -17,9 +17,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
         android:text="Welcome !"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_marginTop="10dp"
         android:textColor="@color/white" />
 

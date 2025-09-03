@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NowPlaying"
-    android:background="?attr/themeColor"
+    android:background="@color/black"
     android:alpha="0.8">
+    <!-- android:background="?attr/themeColor" -->
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgNP"
@@ -28,7 +29,7 @@
         android:src="@drawable/play_icon"
         android:contentDescription="@string/playlist_btn"
         android:scaleType="centerInside"
-        app:tint="@android:color/black" />
+        app:tint="@android:color/white" />
 
     <ImageButton
         android:id="@+id/nextBtnNP"
@@ -41,7 +42,7 @@
         android:src="@drawable/next_icon"
         android:contentDescription="@string/playlist_btn"
         android:scaleType="centerInside"
-        app:tint="@android:color/black" />
+        app:tint="@android:color/white" />
 
 
     <TextView
@@ -50,7 +51,7 @@
         android:layout_height="60dp"
         android:text="@string/song_name"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_toStartOf="@id/playPauseBtnNP"
