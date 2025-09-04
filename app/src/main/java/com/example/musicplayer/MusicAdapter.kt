@@ -51,6 +51,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         holder.album.text = musicList[position].album
         holder.duration.text =  formatDuration(musicList[position].duration)
 
+
         Glide.with(context)
             .load(musicList[position].artUri)
             .apply(RequestOptions().placeholder(R.drawable.clorinde_icon).centerCrop())
@@ -62,12 +63,15 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
                     sendIntent(ref = "PlaylistDetailsAdapter", pos=position)
                 }
             }
+            // when song item is selected in selection activity, highlight as pink , else deselect it
             selectionActivity ->{
                 holder.root.setOnClickListener {
                     if(addSong(musicList[position]))
                         holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.cool_pink))
                     else
-                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                    //    old code
+                    //    holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                        holder.root.setBackgroundResource(0)
                 }
             }
             else -> {
