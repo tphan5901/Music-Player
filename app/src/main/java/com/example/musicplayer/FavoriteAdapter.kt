@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.musicplayer.MainActivity.Companion.getColorFromIndex
 import com.example.musicplayer.databinding.FavoriteViewBinding
 
 class FavoriteAdapter(private val context: Context, private var musicList: ArrayList<Music>) : RecyclerView.Adapter<FavoriteAdapter.MyHolder>() {
@@ -21,7 +22,13 @@ class FavoriteAdapter(private val context: Context, private var musicList: Array
         return MyHolder(FavoriteViewBinding.inflate(LayoutInflater.from(context), parent, false))
     }
 
+
+
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
+        // ✅ Apply theme color to song text
+        val themeColor = ContextCompat.getColor(context, getColorFromIndex(MainActivity.themeIndex))
+        holder.name.setTextColor(themeColor)
+
         holder.name.text = musicList[position].title
         Glide.with(context)
             .load(musicList[position].artUri)

@@ -168,7 +168,7 @@
             android:src="@drawable/repeat_icon"
             android:background="@android:color/transparent"
             android:layout_marginEnd="5dp"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:contentDescription="@string/repeat_btn"
             android:layout_weight="1"/>
 
@@ -181,7 +181,7 @@
             android:src="@drawable/equalizer_icon"
             android:background="@android:color/transparent"
             android:layout_marginEnd="5dp"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:contentDescription="@string/equalizer_btn"
             android:layout_weight="1"/>
 
@@ -194,7 +194,7 @@
             android:src="@drawable/timer_icon"
             android:background="@android:color/transparent"
             android:layout_marginEnd="5dp"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:contentDescription="@string/timer_btn"
             android:layout_weight="1"/>
 
@@ -207,7 +207,7 @@
             android:src="@drawable/share_icon"
             android:background="@android:color/transparent"
             android:layout_marginEnd="5dp"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:contentDescription="@string/share_btn"
             android:layout_weight="1"/>
 

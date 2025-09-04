@@ -37,16 +37,15 @@
             android:src="@drawable/back_icon"
             android:contentDescription="@string/back_btn"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@android:color/black"
             android:padding="5dp"/>
 
         <TextView
+            android:id="@+id/favoriteTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/favorites_btn"
             android:gravity="center"
             android:text="@string/favorites_btn"
-            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"/>
 
@@ -75,14 +74,12 @@
         android:contentDescription="@string/shuffle_btn"
         app:icon="@drawable/shuffle_icon"
         app:iconSize="35dp"
-        app:iconTint="?attr/themeColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.958"
         app:layout_constraintHorizontal_bias="0.954"
-        app:strokeColor="?attr/themeColor"
         app:strokeWidth="2dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

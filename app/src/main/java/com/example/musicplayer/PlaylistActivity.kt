@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +11,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.musicplayer.MainActivity.Companion.getColorFromIndex
 import com.example.musicplayer.databinding.ActivityPlaylistBinding
 import com.example.musicplayer.databinding.AddPlaylistDialogBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -102,6 +105,15 @@ class PlaylistActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
+
+        val themeColor = ContextCompat.getColor(this, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+
+        // Apply theme color
+        binding.backBtnPLA.setColorFilter(themeColor)
+        binding.addPlaylistBtn.strokeColor =
+            ContextCompat.getColorStateList(this, getColorFromIndex(MainActivity.themeIndex))
+        binding.addPlaylistBtn.icon?.setTint(themeColor)
+        binding.addPlaylistBtn.iconTint = ColorStateList.valueOf(themeColor)
 
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)

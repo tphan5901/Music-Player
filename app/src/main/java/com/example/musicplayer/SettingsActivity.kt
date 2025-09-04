@@ -9,7 +9,10 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.core.graphics.drawable.toDrawable
+import com.example.musicplayer.MainActivity.Companion.getColorFromIndex
 import com.example.musicplayer.databinding.ActivitySettingsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -33,13 +36,13 @@ class SettingsActivity : AppCompatActivity() {
             1 -> binding.coolBlueTheme.setBackgroundColor(Color.WHITE)
             2 -> binding.coolPurpleTheme.setBackgroundColor(Color.WHITE)
             3 -> binding.coolGreenTheme.setBackgroundColor(Color.WHITE)
-            4 -> binding.coolBlackTheme.setBackgroundColor(Color.WHITE)
+            4 -> binding.coolOrangeTheme.setBackgroundColor(Color.WHITE)
         }
         binding.coolPinkTheme.setOnClickListener { saveTheme(0) }
         binding.coolBlueTheme.setOnClickListener { saveTheme(1) }
         binding.coolPurpleTheme.setOnClickListener { saveTheme(2) }
         binding.coolGreenTheme.setOnClickListener { saveTheme(3) }
-        binding.coolBlackTheme.setOnClickListener { saveTheme(4) }
+        binding.coolOrangeTheme.setOnClickListener { saveTheme(4) }
         binding.versionName.text = getVersionName()
         binding.sortBtn.setOnClickListener {
             val menuList = arrayOf("Recently Added", "Song Title", "File Size")
@@ -85,21 +88,14 @@ class SettingsActivity : AppCompatActivity() {
         if(MainActivity.themeIndex != index){
             val editor = getSharedPreferences("THEMES", MODE_PRIVATE).edit()
             editor.putInt("themeIndex", index)
-            val builder = MaterialAlertDialogBuilder(this)
-            builder.setTitle("Apply Theme")
-                .setMessage("Do u want to apply this theme?")
-                .setPositiveButton( "Yes"){_, _ ->
-                    exitApplication()
-                }
-                .setNegativeButton("No"){ dialog, _->
-                    dialog.dismiss()
-                }
-            val customDialog = builder.create()
-            customDialog.show()
-            customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-            customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+            editor.apply()
+
+            // Apply immediately
+            MainActivity.themeIndex = index
+            Toast.makeText(this, "Theme applied!", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun getVersionName(): String {
         return try {
@@ -133,6 +129,23 @@ class SettingsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Background image set!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun applyTheme() {
+        val themeColorRes = getColorFromIndex(MainActivity.themeIndex)
+        // Convert to color ID
+        val themeColor = ContextCompat.getColor(this, themeColorRes)
+        // Apply color to action bar
+        supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
+        // Apply color to sort icon tint
+        binding.sortBtn.imageTintList = ContextCompat.getColorStateList(this, themeColorRes)
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        applyTheme()
     }
 
 

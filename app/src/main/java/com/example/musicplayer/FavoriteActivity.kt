@@ -1,13 +1,16 @@
 package com.example.musicplayer
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.musicplayer.MainActivity.Companion.getColorFromIndex
 import com.example.musicplayer.databinding.ActivityFavoriteBinding
 
 class FavoriteActivity : AppCompatActivity() {
@@ -28,8 +31,6 @@ class FavoriteActivity : AppCompatActivity() {
         //removes header bar
         supportActionBar?.hide()
         //bind the back button eventListener
-        val tempList = ArrayList<String>()
-        tempList.add("Song 1")
         binding.backBtnFA.setOnClickListener { finish() }
         binding.favoriteRV.setHasFixedSize(true)
         binding.favoriteRV.setItemViewCacheSize(13)
@@ -58,8 +59,22 @@ class FavoriteActivity : AppCompatActivity() {
         return -1
     }
 
+
+
     override fun onResume() {
         super.onResume()
+
+        val themeColor = ContextCompat.getColor(this, getColorFromIndex(MainActivity.themeIndex))
+
+        // 🔹 Apply theme color
+        binding.backBtnFA.setColorFilter(themeColor)
+        binding.favoriteTxt.setTextColor(themeColor)
+        binding.shuffleBtnFA.strokeColor =
+            ContextCompat.getColorStateList(this, getColorFromIndex(MainActivity.themeIndex))
+        binding.shuffleBtnFA.icon?.setTint(themeColor)
+        binding.shuffleBtnFA.iconTint = ColorStateList.valueOf(themeColor)
+
+
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)
 

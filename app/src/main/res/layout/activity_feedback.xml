@@ -30,7 +30,7 @@
         android:id="@+id/feedbackMsgFA"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:hint="@string/feedback"
+        android:hint="Thoughts..."
         android:gravity="center|start"
         android:paddingHorizontal="16dp"/>
 

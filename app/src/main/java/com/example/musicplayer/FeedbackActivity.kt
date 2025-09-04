@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import com.example.musicplayer.databinding.ActivityFeedbackBinding
 import java.util.Properties
 import javax.mail.Authenticator
@@ -70,6 +72,16 @@ class FeedbackActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun applyTheme() {
+        val themeColor = ContextCompat.getColor(this, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+        supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyTheme()
     }
 
 }

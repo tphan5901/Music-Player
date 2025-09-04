@@ -3,10 +3,12 @@ package com.example.musicplayer
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.musicplayer.databinding.ActivityPlaylistDetailsBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
+
 
 class PlaylistDetails : AppCompatActivity() {
 
@@ -113,6 +116,21 @@ class PlaylistDetails : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
+
+        val themeColor = ContextCompat.getColor(this, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+
+        // 🔹 Apply theme color
+        binding.addBtnPD.compoundDrawables[1]?.setTint(themeColor)
+        binding.removeAllPD.compoundDrawables[1]?.setTint(themeColor)
+        binding.shuffleBtnPD.iconTint = ColorStateList.valueOf(themeColor)
+        binding.backBtnPD.setColorFilter(themeColor)
+        binding.playlistNamePD.setTextColor(themeColor)
+        binding.moreInfoPD.setTextColor(themeColor)
+        binding.shuffleBtnPD.strokeColor =
+            ContextCompat.getColorStateList(this, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+        binding.shuffleBtnPD.icon?.setTint(themeColor)
+
+
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)
 

@@ -32,6 +32,11 @@ class PlaylistViewAdapter(private val context: Context, private var playlistList
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val playlist = playlistList[position]
 
+
+        // Apply theme
+        val themeColor = ContextCompat.getColor(context, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+        holder.name.setTextColor(themeColor)
+
         holder.name.text = playlist.name
         holder.name.isSelected = true
 

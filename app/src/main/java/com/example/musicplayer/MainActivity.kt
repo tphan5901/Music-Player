@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -40,27 +41,43 @@ class MainActivity : AppCompatActivity() {
         lateinit var MusicListMA : ArrayList<Music>
         lateinit var musicListSearch : ArrayList<Music>
         var search: Boolean = false
-        var selectedSongs: MutableSet<String> = mutableSetOf()
+
         var themeIndex: Int = 0
 
     //    val currentTheme = arrayOf(R.style.coolPink, R.style.coolBlue, R.style.coolPurple, R.style.coolGreen, R.style.coolBlack)
     //    val currentThemeNav = arrayOf(R.style.coolPinkNav, R.style.coolBlueNav, R.style.coolPurpleNav, R.style.coolGreenNav, R.style.coolBlackNav)
-        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_black)
+        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_orange)
         var sortOrder: Int = 0
         val sortingList = arrayOf(MediaStore.Audio.Media.DATE_ADDED + " DESC", MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.SIZE + " DESC")
-    }
 
+        @JvmStatic
+        fun getColorFromIndex(index: Int): Int {
+            return when (index) {
+                0 -> R.color.cool_pink
+                1 -> R.color.cool_blue
+                2 -> R.color.cool_purple
+                3 -> R.color.cool_green
+                4 -> R.color.cool_orange
+                else -> R.color.black
+            }
+        }
+
+
+    }
 
 
     @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Switch to the app theme BEFORE calling super.onCreate() and setContentView
-        super.onCreate(savedInstanceState)
+        // Load saved theme first
         val themeEditor = getSharedPreferences("THEMES", MODE_PRIVATE)
         themeIndex = themeEditor.getInt("themeIndex", 0)
-    //    setTheme(currentThemeNav[themeIndex])
+        setTheme(getColorFromIndex(themeIndex))
+
+        // Switch to the app theme BEFORE calling super.onCreate() and setContentView
+        super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -268,9 +285,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onResume(){
         super.onResume()
+
+        val themeColor = ContextCompat.getColor(this, getColorFromIndex(MainActivity.themeIndex))
+        binding.totalSongs.setTextColor(themeColor)
+        binding.shuffleBtn.setTextColor(themeColor)
+        binding.favoriteBtn.setTextColor(themeColor)
+        binding.playlistBtn.setTextColor(themeColor)
+
+        // Apply background gradient dynamically
+        binding.bgLayout.setBackgroundResource(MainActivity.currentGradient[MainActivity.themeIndex])
+
+        // Update drawable tint
+        binding.shuffleBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+        binding.favoriteBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+        binding.playlistBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+
+
+        // --- Apply gradient to Navigation Drawer ---
+        val headerView = binding.navView.getHeaderView(0)  // get first header
+        val navHeaderLayout = headerView.findViewById<LinearLayout>(R.id.linearLayoutNav)
+        navHeaderLayout.setBackgroundResource(MainActivity.currentGradient[MainActivity.themeIndex])
+
+        // ✅ Apply theme to Navigation Drawer menu titles
+        binding.navView.itemTextColor = ContextCompat.getColorStateList(this, getColorFromIndex(themeIndex))
+        binding.navView.itemIconTintList = ContextCompat.getColorStateList(this, getColorFromIndex(themeIndex))
+
+        // Apply ActionBar color
+        supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
+        musicAdapter.notifyDataSetChanged()
 
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)
@@ -344,6 +391,8 @@ class MainActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
+
 
 
 }

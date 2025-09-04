@@ -3,6 +3,8 @@ package com.example.musicplayer
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import com.example.musicplayer.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
@@ -23,5 +25,16 @@ class AboutActivity : AppCompatActivity() {
         return "Developed by: Madeline Yamada" +
         "\n\nProvide me some feedback to improve the app experience"
     }
+
+    private fun applyTheme() {
+        val themeColor = ContextCompat.getColor(this, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+        supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyTheme()
+    }
+
 
 }

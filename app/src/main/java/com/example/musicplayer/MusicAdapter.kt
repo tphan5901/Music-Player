@@ -21,6 +21,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         val root = binding.root
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicAdapter.MyHolder {
         return MyHolder(MusicViewBinding.inflate(LayoutInflater.from(context), parent, false))
     }
@@ -36,13 +37,15 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         notifyDataSetChanged()
     }
 
+
     //convert duration of song file to readable format
     fun formatDuration(durationMs: Long): String {
         val totalSeconds = durationMs / 1000
         val minutes = totalSeconds / 60
         val seconds = totalSeconds % 60
-        return String.format("%02d:%02d", minutes, seconds)
+        return String.format("%d:%02d", minutes, seconds)
     }
+
 
 
     //display song title, song duration on main activity(screen)
@@ -50,6 +53,18 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         holder.title.text = musicList[position].title
         holder.album.text = musicList[position].album
         holder.duration.text =  formatDuration(musicList[position].duration)
+        val song = musicList[position]
+        val themeColor = ContextCompat.getColor(context, MainActivity.getColorFromIndex(MainActivity.themeIndex))
+
+        // Apply theme
+        holder.title.text = song.title
+        holder.album.text = song.album
+    //    holder.duration.text = song.duration.toString()
+        holder.duration.text = formatDuration(song.duration)
+        holder.duration.setTextColor(themeColor)
+        holder.title.setTextColor(themeColor)
+        holder.album.setTextColor(themeColor)
+
 
 
         Glide.with(context)
@@ -116,6 +131,8 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         musicList.removeAt(position)
         notifyItemRemoved(position)
     }
+
+
 
 
 }
