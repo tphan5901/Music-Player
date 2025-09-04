@@ -28,19 +28,19 @@
             android:src="@drawable/circle_icon"
             android:tint="@color/cool_pink"/>
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coolBlueTheme"
+            android:id="@+id/coolOrangeTheme"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/circle_icon"
-            android:tint="@color/cool_blue"/>
+            android:tint="@color/orange"/>
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coolPurpleTheme"
+            android:id="@+id/coolYellowTheme"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/circle_icon"
-            android:tint="@color/purple_500"/>
+            android:tint="@color/cool_yellow"/>
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/coolGreenTheme"
             android:layout_width="0dp"
@@ -49,12 +49,12 @@
             android:src="@drawable/circle_icon"
             android:tint="@color/cool_green"/>
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/coolOrangeTheme"
+            android:id="@+id/coolPurpleTheme"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/circle_icon"
-            android:tint="@color/orange"/>
+            android:tint="@color/purple_500"/>
 
     </LinearLayout>
 

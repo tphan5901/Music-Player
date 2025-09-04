@@ -33,16 +33,17 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.title = "Settings"
         when(MainActivity.themeIndex){
             0 -> binding.coolPinkTheme.setBackgroundColor(Color.WHITE)
-            1 -> binding.coolBlueTheme.setBackgroundColor(Color.WHITE)
-            2 -> binding.coolPurpleTheme.setBackgroundColor(Color.WHITE)
+            1 -> binding.coolOrangeTheme.setBackgroundColor(Color.WHITE)
+            2 -> binding.coolYellowTheme.setBackgroundColor(Color.WHITE)
             3 -> binding.coolGreenTheme.setBackgroundColor(Color.WHITE)
-            4 -> binding.coolOrangeTheme.setBackgroundColor(Color.WHITE)
+            4 -> binding.coolPurpleTheme.setBackgroundColor(Color.WHITE)
         }
         binding.coolPinkTheme.setOnClickListener { saveTheme(0) }
-        binding.coolBlueTheme.setOnClickListener { saveTheme(1) }
-        binding.coolPurpleTheme.setOnClickListener { saveTheme(2) }
+        binding.coolOrangeTheme.setOnClickListener { saveTheme(1) }
+        binding.coolYellowTheme.setOnClickListener { saveTheme(2) }
         binding.coolGreenTheme.setOnClickListener { saveTheme(3) }
-        binding.coolOrangeTheme.setOnClickListener { saveTheme(4) }
+        binding.coolPurpleTheme.setOnClickListener { saveTheme(4) }
+
         binding.versionName.text = getVersionName()
         binding.sortBtn.setOnClickListener {
             val menuList = arrayOf("Recently Added", "Song Title", "File Size")

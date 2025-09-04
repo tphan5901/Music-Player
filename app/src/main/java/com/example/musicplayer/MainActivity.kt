@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     //    val currentTheme = arrayOf(R.style.coolPink, R.style.coolBlue, R.style.coolPurple, R.style.coolGreen, R.style.coolBlack)
     //    val currentThemeNav = arrayOf(R.style.coolPinkNav, R.style.coolBlueNav, R.style.coolPurpleNav, R.style.coolGreenNav, R.style.coolBlackNav)
-        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_blue, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_orange)
+        val currentGradient = arrayOf(R.drawable.gradient_pink, R.drawable.gradient_yellow, R.drawable.gradient_purple, R.drawable.gradient_green, R.drawable.gradient_orange)
         var sortOrder: Int = 0
         val sortingList = arrayOf(MediaStore.Audio.Media.DATE_ADDED + " DESC", MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.SIZE + " DESC")
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         fun getColorFromIndex(index: Int): Int {
             return when (index) {
                 0 -> R.color.cool_pink
-                1 -> R.color.cool_blue
+                1 -> R.color.cool_yellow
                 2 -> R.color.cool_purple
                 3 -> R.color.cool_green
                 4 -> R.color.cool_orange
