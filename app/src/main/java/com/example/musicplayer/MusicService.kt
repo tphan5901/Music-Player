@@ -39,7 +39,6 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
         }
     }
 
-
     //displays music player on device notification drop down
     @SuppressLint("SuspiciousIndentation")
     fun showNotification(playPauseIcon: Int) {
@@ -101,7 +100,6 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
                         MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong()
                     ).build()
                 )
-
             }
 
             startForeground(13, notification)

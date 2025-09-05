@@ -17,7 +17,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,34 +53,35 @@ android {
             )
         }
     }
+
 }
 
 
 dependencies {
-
     // Glide for image loading
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
+    // Unit tests [Junit]
+    testImplementation("junit:junit:4.13.2")  // Unit test framework
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    //sending email
+    //Send email
     implementation("com.sun.mail:android-mail:1.6.2")
     implementation("com.sun.mail:android-activation:1.6.2")
 
     // Storing Objects
     implementation(libs.gson)
 
-    // for Notification
+    // Notifications
     implementation("androidx.media:media:1.3.1")
 
-    //google gmail api
+    //Google gmail API
     implementation("com.google.android.gms:play-services-auth:20.7.0")
-
-
-    // Google API Client (for Android)
     implementation("com.google.api-client:google-api-client-android:1.34.1")
     implementation("com.google.api-client:google-api-client-gson:1.34.1")
 
@@ -103,4 +103,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }

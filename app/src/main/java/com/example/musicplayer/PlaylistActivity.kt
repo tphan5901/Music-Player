@@ -88,7 +88,12 @@ class PlaylistActivity : AppCompatActivity() {
             return
         }
 
-        val tempPlaylist = Playlist().apply {
+        val tempPlaylist = Playlist(
+            "Test Playlist",
+            ArrayList<Any?>(),
+            "01-01-2025",
+            ArrayList<Any?>()
+        ).apply {
             this.name = name
             this.playlist = ArrayList()
             this.createdOn = SimpleDateFormat("dd MMM yyyy", java.util.Locale.ENGLISH)

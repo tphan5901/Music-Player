@@ -427,7 +427,8 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             cursor!!.moveToFirst()
             val path = dataColumn?.let { cursor.getString(it) }
             val duration = durationColumn?.let { cursor.getLong(it) }!!
-            return Music(id = "Unknown", title = path.toString(), album = "Unknown", artist = "Unknown", duration = duration,
+            return Music(
+                id = "Unknown", title = path.toString(), album = "Unknown", artist = "Unknown", duration = duration,
                 artUri = "Unknown", path = path.toString())
         } finally {
             cursor?.close()

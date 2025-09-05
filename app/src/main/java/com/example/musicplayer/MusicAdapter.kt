@@ -38,7 +38,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
     }
 
 
-    //convert duration of song file to readable format
+    //Convert duration of song file to readable format
     fun formatDuration(durationMs: Long): String {
         val totalSeconds = durationMs / 1000
         val minutes = totalSeconds / 60
@@ -58,6 +58,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         // Apply theme
         holder.title.text = song.title
         holder.album.text = song.album
+    // old code displays raw bytes of song duration
     //    holder.duration.text = song.duration.toString()
         holder.duration.text = formatDuration(song.duration)
         holder.duration.setTextColor(themeColor)
@@ -75,8 +76,17 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
                     sendIntent(ref = "PlaylistDetailsAdapter", pos=position)
                 }
             }
-            // when song item is selected in selection activity, highlight as pink , else deselect it
+            // when song item is selected in selection activity, highlight it , else deselect it
             selectionActivity ->{
+                // Highlight song if it's already in the current playlist
+                val isInPlaylist = PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist
+                    .any { it.id == musicList[position].id }
+
+                if (isInPlaylist) {
+                    holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+                } else {
+                    holder.root.setBackgroundResource(0)
+                }
                 holder.root.setOnClickListener {
                     if(addSong(musicList[position]))
                         holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.black))

@@ -30,14 +30,19 @@ data class Music(
 }
 
 // Playlist Data Model
-class Playlist {
+class Playlist(
+    string: String,
+    arrayList: ArrayList<Any?>,
+    string1: String,
+    arrayList1: ArrayList<Any?>
+) {
     lateinit var name: String
     lateinit var playlist: ArrayList<Music>
     lateinit var createdOn: String
     var imageUri: String = ""
 }
 
-// MusicPlaylist container
+// MusicPlaylist Data Model
 class MusicPlaylist {
     var ref: ArrayList<Playlist> = ArrayList()
 }
@@ -88,7 +93,7 @@ fun favoriteChecker(id: String): Int {
     return -1
 }
 
-// Remove missing songs from a playlist
+// Remove missing songs from playlist
 fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music> {
     val iterator = playlist.iterator()
     while (iterator.hasNext()) {
