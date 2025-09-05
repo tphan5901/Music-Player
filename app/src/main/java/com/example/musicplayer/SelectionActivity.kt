@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.example.musicplayer.MainActivity.Companion.getColorFromIndex
 import com.example.musicplayer.MainActivity.Companion.musicListSearch
 import com.example.musicplayer.MainActivity.Companion.search
 import com.example.musicplayer.databinding.ActivitySelectionBinding
+
 
 class SelectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectionBinding
@@ -57,6 +59,9 @@ class SelectionActivity : AppCompatActivity() {
         })
     }
 
+    fun Int.dpToPx(): Int {
+        return (this * Resources.getSystem().displayMetrics.density).toInt()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -67,6 +72,13 @@ class SelectionActivity : AppCompatActivity() {
         // Get the search icon inside SearchView
         val searchIcon: ImageView = binding.searchViewSA.findViewById(androidx.appcompat.R.id.search_mag_icon)
         searchIcon.setColorFilter(themeColor)
+
+        // tint custom_search_view icon
+        val bgDrawable = ContextCompat.getDrawable(this, R.drawable.custom_search_view)?.mutate()
+        if (bgDrawable is android.graphics.drawable.GradientDrawable) {
+            bgDrawable.setStroke(2.dpToPx(), themeColor)
+        }
+        binding.searchViewSA.background = bgDrawable
 
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)
@@ -84,5 +96,6 @@ class SelectionActivity : AppCompatActivity() {
             binding.bgImage.setImageResource(R.drawable.yuka_kuromochi)
         }
     }
+
 
 }
