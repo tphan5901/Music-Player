@@ -89,14 +89,13 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setOnlyAlertOnce(true)
             .addAction(R.drawable.previous_icon, "Previous", prevPendingIntent)
-            .addAction(R.drawable.play_icon, "Play", playPendingIntent)
+            .addAction(playPauseIcon, "Play/Pause", playPendingIntent)
             .addAction(R.drawable.next_icon, "Next", nextPendingIntent)
             .addAction(R.drawable.exit_icon, "Exit", exitPendingIntent)
             .build()
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
                 mediaSession.setMetadata(
                     MediaMetadataCompat.Builder().putLong(
                         MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong()

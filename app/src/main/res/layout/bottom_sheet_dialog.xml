@@ -15,7 +15,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/timer_icon"
-        app:tint="@color/cool_pink"
+        app:tint="@color/cool_blue"
         android:layout_margin="8dp"
         android:contentDescription="@string/min_15"/>
     <TextView
@@ -37,7 +37,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/timer_icon"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:layout_margin="8dp"
             android:contentDescription="@string/min_30"/>
         <TextView
@@ -59,7 +59,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/timer_icon"
-            app:tint="@color/cool_pink"
+            app:tint="@color/cool_blue"
             android:layout_margin="8dp"
             android:contentDescription="@string/min_60"/>
         <TextView

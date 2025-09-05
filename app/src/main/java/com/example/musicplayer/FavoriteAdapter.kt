@@ -23,7 +23,6 @@ class FavoriteAdapter(private val context: Context, private var musicList: Array
     }
 
 
-
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         // ✅ Apply theme color to song text
         val themeColor = ContextCompat.getColor(context, getColorFromIndex(MainActivity.themeIndex))

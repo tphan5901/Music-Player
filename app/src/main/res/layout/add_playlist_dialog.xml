@@ -15,6 +15,7 @@
         app:startIconTint="@color/purple_500"
         android:hint="@string/playlist_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/playlistName"
             android:layout_width="match_parent"

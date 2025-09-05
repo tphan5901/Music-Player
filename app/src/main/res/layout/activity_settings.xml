@@ -20,6 +20,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:background="@color/white">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/coolPinkTheme"
             android:layout_width="0dp"

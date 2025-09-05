@@ -37,7 +37,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
     companion object {
         lateinit var musicListPA: ArrayList<Music>
         var songPosition: Int = 0
-
         var isPlaying: Boolean = false
         var musicService: MusicService? = null
 
