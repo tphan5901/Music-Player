@@ -45,8 +45,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         val seconds = totalSeconds % 60
         return String.format("%d:%02d", minutes, seconds)
     }
-
-
+    
 
     //display song title, song duration on main activity(screen)
     override fun onBindViewHolder(holder: MusicAdapter.MyHolder, position: Int) {
@@ -65,8 +64,6 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         holder.title.setTextColor(themeColor)
         holder.album.setTextColor(themeColor)
 
-
-
         Glide.with(context)
             .load(musicList[position].artUri)
             .apply(RequestOptions().placeholder(R.drawable.clorinde_icon).centerCrop())
@@ -82,7 +79,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
             selectionActivity ->{
                 holder.root.setOnClickListener {
                     if(addSong(musicList[position]))
-                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.cool_pink))
+                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
                     else
                     //    old code
                     //    holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
@@ -120,8 +117,6 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
                 PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist.removeAt(index)
                 return false
             }
-
-
         }
         PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist.add(song)
         return true

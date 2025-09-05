@@ -97,7 +97,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getVersionName(): String {
         return try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
