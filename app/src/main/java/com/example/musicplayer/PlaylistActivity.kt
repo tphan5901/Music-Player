@@ -21,6 +21,8 @@ import com.example.musicplayer.databinding.ActivityPlaylistBinding
 import com.example.musicplayer.databinding.AddPlaylistDialogBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class PlaylistActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlaylistBinding
@@ -81,13 +83,23 @@ class PlaylistActivity : AppCompatActivity() {
             }.show()
     }
 
-    private fun addPlaylist(name: String) {
+    public fun addPlaylist(name: String) {
         val playlistExists = musicPlaylist.ref.any { it.name == name }
         if (playlistExists) {
             Toast.makeText(this, "Playlist Exists", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // new playlist object instantiation
+        val tempPlaylist = Playlist(
+            name,
+            ArrayList(),
+            SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                .format(Calendar.getInstance().time),
+            ""
+        )
+
+        /* old playlist object instantiation [inefficient]
         val tempPlaylist = Playlist(
             "Test Playlist",
             ArrayList<Any?>(),
@@ -100,6 +112,7 @@ class PlaylistActivity : AppCompatActivity() {
                 .format(java.util.Calendar.getInstance().time)
             this.imageUri = ""
         }
+        */
 
 
         musicPlaylist.ref.add(tempPlaylist)
@@ -170,6 +183,7 @@ class PlaylistActivity : AppCompatActivity() {
             pickImageLauncher.launch("image/*")
         }
         alertDialog.show()
+
     }
 
 }

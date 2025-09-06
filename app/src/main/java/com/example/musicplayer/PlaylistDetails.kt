@@ -108,7 +108,7 @@ class PlaylistDetails : AppCompatActivity() {
                     .show()
             }
         })
-            itemTouchHelper.attachToRecyclerView(binding.playlistDetailsRV)
+        itemTouchHelper.attachToRecyclerView(binding.playlistDetailsRV)
 
     }
 

@@ -29,7 +29,16 @@ data class Music(
     }
 }
 
+
 // Playlist Data Model
+class Playlist(
+    var name: String,
+    var playlist: ArrayList<Music>,
+    var createdOn: String,
+    var imageUri: String = ""
+)
+
+/* old data model
 class Playlist(
     string: String,
     arrayList: ArrayList<Any?>,
@@ -41,6 +50,8 @@ class Playlist(
     lateinit var createdOn: String
     var imageUri: String = ""
 }
+*/
+
 
 // MusicPlaylist Data Model
 class MusicPlaylist {
