@@ -60,12 +60,10 @@ class FavoriteActivity : AppCompatActivity() {
     }
 
 
-
     override fun onResume() {
         super.onResume()
 
         val themeColor = ContextCompat.getColor(this, getColorFromIndex(MainActivity.themeIndex))
-
         // 🔹 Apply theme color
         binding.backBtnFA.setColorFilter(themeColor)
         binding.favoriteTxt.setTextColor(themeColor)
@@ -88,8 +86,9 @@ class FavoriteActivity : AppCompatActivity() {
                 )
                 .into(binding.bgImage)
         } else {
-            binding.bgImage.setImageResource(R.drawable.clorinde_icon)
+            binding.bgImage.setImageResource(R.drawable.nilou)
         }
+
     }
 
 
