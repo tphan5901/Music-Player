@@ -13,13 +13,13 @@ import com.example.musicplayer.PlayerActivity.Companion.songPosition
 class NotificationReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?){
         when(intent?.action){
-                ApplicationClass.PREVIOUS -> prevNextSong(increment = false, context = context!!)
-                ApplicationClass.PLAY -> if(PlayerActivity.isPlaying) pauseMusic() else playMusic()
-                ApplicationClass.NEXT ->  prevNextSong(increment = true, context = context!!)
-                ApplicationClass.EXIT -> {
-                    exitApplication()
-                }
+            ApplicationClass.PREVIOUS -> prevNextSong(increment = false, context = context!!)
+            ApplicationClass.PLAY -> if(PlayerActivity.isPlaying) pauseMusic() else playMusic()
+            ApplicationClass.NEXT ->  prevNextSong(increment = true, context = context!!)
+            ApplicationClass.EXIT -> {
+                exitApplication()
             }
+        }
     }
 
     private fun playMusic(){

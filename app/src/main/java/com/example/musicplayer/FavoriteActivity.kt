@@ -1,9 +1,8 @@
 package com.example.musicplayer
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -16,14 +15,13 @@ import com.example.musicplayer.databinding.ActivityFavoriteBinding
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var adapter: FavoriteAdapter
-
     companion object {
         var favoriteSongs: ArrayList<Music> = ArrayList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
- //       setTheme(MainActivity.currentTheme[MainActivity.themeIndex])
+        //       setTheme(MainActivity.currentTheme[MainActivity.themeIndex])
 
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -37,13 +35,34 @@ class FavoriteActivity : AppCompatActivity() {
         binding.favoriteRV.layoutManager = GridLayoutManager(this, 4)
         adapter = FavoriteAdapter(this, favoriteSongs)
         binding.favoriteRV.adapter = adapter
-        if(favoriteSongs.size < 1) binding.shuffleBtnFA.visibility = View.INVISIBLE
-        binding.shuffleBtnFA.setOnClickListener{
+        /*
+        if (favoriteSongs.size < 1) binding.shuffleBtnFA.visibility = View.INVISIBLE
+        binding.shuffleBtnFA.setOnClickListener {
             val intent = Intent(this, PlayerActivity::class.java)
             intent.putExtra("index", 0)
             intent.putExtra("class", "FavoriteShuffle")
             startActivity(intent)
         }
+
+         */
+
+        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        val favoriteBtn = findViewById<Button>(R.id.favoriteBtn)
+        val playlistBtn = findViewById<Button>(R.id.playlistBtn)
+
+        homeBtn.setOnClickListener {
+            startActivity(Intent(this@FavoriteActivity, MainActivity::class.java))
+        }
+
+        favoriteBtn.setOnClickListener {
+            favoriteBtn.isEnabled = false
+        }
+
+
+        playlistBtn.setOnClickListener {
+            startActivity(Intent(this@FavoriteActivity, PlaylistActivity::class.java))
+        }
+
 
     }
 
@@ -67,11 +86,24 @@ class FavoriteActivity : AppCompatActivity() {
         // 🔹 Apply theme color
         binding.backBtnFA.setColorFilter(themeColor)
         binding.favoriteTxt.setTextColor(themeColor)
+        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        val favoriteBtn = findViewById<Button>(R.id.favoriteBtn)
+        val playlistBtn = findViewById<Button>(R.id.playlistBtn)
+
+        homeBtn.setTextColor(themeColor)
+        homeBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+
+        favoriteBtn.setTextColor(themeColor)
+        favoriteBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+
+        playlistBtn.setTextColor(themeColor)
+        playlistBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+        /*
         binding.shuffleBtnFA.strokeColor =
             ContextCompat.getColorStateList(this, getColorFromIndex(MainActivity.themeIndex))
         binding.shuffleBtnFA.icon?.setTint(themeColor)
         binding.shuffleBtnFA.iconTint = ColorStateList.valueOf(themeColor)
-
+        */
 
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)

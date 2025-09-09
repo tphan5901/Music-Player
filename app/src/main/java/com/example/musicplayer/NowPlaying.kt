@@ -45,6 +45,7 @@ class NowPlaying : Fragment() {
             ContextCompat.startActivity(requireContext(), intent, null)
         }
         return view
+
     }
 
     override fun onResume() {
@@ -68,6 +69,7 @@ class NowPlaying : Fragment() {
         binding.playPauseBtnNP.setImageResource(R.drawable.pause_icon)
         PlayerActivity.musicService!!.showNotification(R.drawable.pause_icon) //1F
     }
+
     private fun pauseMusic(){
         PlayerActivity.isPlaying = false
         PlayerActivity.musicService!!.mediaPlayer!!.pause()

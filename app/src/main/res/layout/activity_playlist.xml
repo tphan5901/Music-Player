@@ -90,15 +90,22 @@
         android:contentDescription="@string/favorites_btn"
         app:icon="@drawable/add_icon"
         app:iconSize="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:iconTint="?attr/themeColor"
+        app:layout_constraintBottom_toTopOf="@id/bottomButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
         app:strokeColor="?attr/themeColor"
-        app:iconTint="?attr/themeColor"
         app:strokeWidth="2dp" />
+
+    <include
+        layout="@layout/bottom_buttons"
+        android:id="@+id/bottomButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

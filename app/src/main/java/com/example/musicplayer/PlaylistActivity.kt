@@ -1,5 +1,6 @@
 package com.example.musicplayer
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
@@ -64,6 +65,24 @@ class PlaylistActivity : AppCompatActivity() {
         binding.playlistRV.adapter = adapter
         binding.backBtnPLA.setOnClickListener { finish() }
         binding.addPlaylistBtn.setOnClickListener { customAlertDialog() }
+
+        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        val favoriteBtn = findViewById<Button>(R.id.favoriteBtn)
+        val playlistBtn = findViewById<Button>(R.id.playlistBtn)
+
+        homeBtn.setOnClickListener {
+            startActivity(Intent(this@PlaylistActivity, MainActivity::class.java))
+        }
+
+        favoriteBtn.setOnClickListener {
+            startActivity(Intent(this@PlaylistActivity, FavoriteActivity::class.java))
+        }
+
+        playlistBtn.setOnClickListener {
+            playlistBtn.isEnabled = false
+        }
+
+
     }
 
     private fun customAlertDialog() {
@@ -132,6 +151,19 @@ class PlaylistActivity : AppCompatActivity() {
             ContextCompat.getColorStateList(this, getColorFromIndex(MainActivity.themeIndex))
         binding.addPlaylistBtn.icon?.setTint(themeColor)
         binding.addPlaylistBtn.iconTint = ColorStateList.valueOf(themeColor)
+
+        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        val favoriteBtn = findViewById<Button>(R.id.favoriteBtn)
+        val playlistBtn = findViewById<Button>(R.id.playlistBtn)
+
+        homeBtn.setTextColor(themeColor)
+        homeBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+
+        favoriteBtn.setTextColor(themeColor)
+        favoriteBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
+
+        playlistBtn.setTextColor(themeColor)
+        playlistBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
 
         val sharedPref = getSharedPreferences("BG_IMAGE", MODE_PRIVATE)
         val bgUri = sharedPref.getString("bg_uri", null)

@@ -9,12 +9,12 @@
     android:padding="5dp">
 
     <Button
-        android:id="@+id/shuffleBtn"
+        android:id="@+id/homeBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:drawableTop="@drawable/shuffle_icon"
-        android:text="@string/shuffle_btn"
+        android:drawableTop="@drawable/home_icon"
+        android:text="Home"
         android:textColor="@color/black"
         android:textAllCaps="false"
         style="@style/Widget.AppCompat.Button.Borderless"/>
