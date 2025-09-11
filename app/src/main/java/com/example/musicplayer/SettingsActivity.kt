@@ -68,11 +68,11 @@ class SettingsActivity : AppCompatActivity() {
         
         // old code causing bug [ACTION_PICK] where bg image selected does not display in other activities.xml
         // btw this bug doesn't register as error when compiled
-       // binding.selectBgImage.setOnClickListener {
-       //     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-      //      intent.type = "image/*"
-     //       startActivityForResult(intent, 101) // requestCode = 101
-     //   }
+        // binding.selectBgImage.setOnClickListener {
+        //     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        //      intent.type = "image/*"
+        //       startActivityForResult(intent, 101) // requestCode = 101
+        //   }
 
         // background image picker
         binding.selectBgImage.setOnClickListener {
@@ -129,9 +129,13 @@ class SettingsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Background image set!", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
-    private fun applyTheme() {
+
+    override fun onResume() {
+        super.onResume()
+        // Apply theme to settings UI
         val themeColorRes = getColorFromIndex(MainActivity.themeIndex)
         // Convert to color ID
         val themeColor = ContextCompat.getColor(this, themeColorRes)
@@ -140,12 +144,6 @@ class SettingsActivity : AppCompatActivity() {
         // Apply color to sort icon tint
         binding.sortBtn.imageTintList = ContextCompat.getColorStateList(this, themeColorRes)
 
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        applyTheme()
     }
 
 

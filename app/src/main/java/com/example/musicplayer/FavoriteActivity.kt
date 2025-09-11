@@ -86,6 +86,7 @@ class FavoriteActivity : AppCompatActivity() {
         // 🔹 Apply theme color
         binding.backBtnFA.setColorFilter(themeColor)
         binding.favoriteTxt.setTextColor(themeColor)
+
         val homeBtn = findViewById<Button>(R.id.homeBtn)
         val favoriteBtn = findViewById<Button>(R.id.favoriteBtn)
         val playlistBtn = findViewById<Button>(R.id.playlistBtn)
@@ -100,7 +101,7 @@ class FavoriteActivity : AppCompatActivity() {
         playlistBtn.compoundDrawablesRelative[1]?.setTint(themeColor)
         /*
         binding.shuffleBtnFA.strokeColor =
-            ContextCompat.getColorStateList(this, getColorFromIndex(MainActivity.themeIndex))
+            ContextCompat.getColorStateList(this, getColorFromIndex(Mai  gnActivity.themeIndex))
         binding.shuffleBtnFA.icon?.setTint(themeColor)
         binding.shuffleBtnFA.iconTint = ColorStateList.valueOf(themeColor)
         */
@@ -122,7 +123,6 @@ class FavoriteActivity : AppCompatActivity() {
         }
 
     }
-
 
 
 }

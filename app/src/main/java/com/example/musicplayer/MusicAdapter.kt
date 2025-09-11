@@ -21,7 +21,6 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         val root = binding.root
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicAdapter.MyHolder {
         return MyHolder(MusicViewBinding.inflate(LayoutInflater.from(context), parent, false))
     }
@@ -68,7 +67,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
         Glide.with(context)
             .load(musicList[position].artUri)
             .apply(RequestOptions().placeholder(R.drawable.clorinde_icon).centerCrop())
-            .error(R.drawable.ganyu) // fallback image when no album art found
+            .error(R.drawable.music_icon) // fallback image when no album art found
             .into(holder.image)
         when{
             playlistDetails -> {

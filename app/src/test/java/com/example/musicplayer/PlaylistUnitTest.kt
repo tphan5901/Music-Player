@@ -94,7 +94,7 @@ class PlaylistUnitTest {
         Assert.assertEquals(0, PlaylistActivity.musicPlaylist.ref.size)
 
         // Create new playlist object
-        val newPlaylist = Playlist("ignored", ArrayList(), "05-09-2025", ArrayList())
+        val newPlaylist = Playlist("ignored", ArrayList(), "05-09-2025", "")
         newPlaylist.name = "My Playlist"
         PlaylistActivity.musicPlaylist.ref.add(newPlaylist)
 

@@ -62,12 +62,19 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.junit.ktx)
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     // Unit tests [Junit]
     testImplementation("junit:junit:4.13.2")  // Unit test framework
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
 
+    // Instrumented tests
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Swipe refresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     //Send email

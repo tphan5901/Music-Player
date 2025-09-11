@@ -7,7 +7,6 @@ import org.junit.Before
 import org.junit.Test
 
 class FavoriteUnitTest {
-
     private lateinit var testSong1: Music
     private lateinit var testSong2: Music
 
@@ -73,5 +72,6 @@ class FavoriteUnitTest {
         assertEquals(-1, checker)
         assertFalse(PlayerActivity.isFavorite)
     }
+
 
 }

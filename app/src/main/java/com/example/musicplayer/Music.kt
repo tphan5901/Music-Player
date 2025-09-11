@@ -1,6 +1,9 @@
 package com.example.musicplayer
 
 import android.media.MediaMetadataRetriever
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import java.io.File
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
@@ -113,4 +116,10 @@ fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music> {
         if (!file.exists()) iterator.remove()
     }
     return playlist
+}
+
+// Applies theme to about & feedback activity
+fun AppCompatActivity.applyTheme(themeIndex: Int) {
+    val themeColor = ContextCompat.getColor(this, MainActivity.getColorFromIndex(themeIndex))
+    this.supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
 }
