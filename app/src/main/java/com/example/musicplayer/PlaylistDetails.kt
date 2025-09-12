@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder
 class PlaylistDetails : AppCompatActivity() {
 
     lateinit var binding: ActivityPlaylistDetailsBinding
+
     lateinit var adapter: MusicAdapter
 
     companion object{
@@ -99,8 +100,7 @@ class PlaylistDetails : AppCompatActivity() {
                     .setPositiveButton("Yes") { _, _ ->
                         // Delete from playlist + refresh
                         adapter.deleteItem(position)
-                        PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist =
-                            adapter.musicList
+                        PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist = adapter.musicList
                     }
                     .setNegativeButton("No") { dialog, _ ->
                         dialog.dismiss()
@@ -149,12 +149,12 @@ class PlaylistDetails : AppCompatActivity() {
 
         binding.playlistNamePD.text = PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].name
         binding.moreInfoPD.text = "Total Songs: ${adapter.itemCount} \n\n" +
-                "Created On:\n${PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].createdOn}\n\n"
+                "Created On: ${PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].createdOn}"
         if(adapter.itemCount > 0)
         {
             Glide.with(this)
                 .load(PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist[0].artUri)
-                .apply(RequestOptions().placeholder(R.drawable.ganyu).centerCrop())
+                .apply(RequestOptions().placeholder(R.drawable.reiko).centerCrop())
                 .into(binding.playlistImgPD)
             binding.shuffleBtnPD.visibility = View.VISIBLE
         }
