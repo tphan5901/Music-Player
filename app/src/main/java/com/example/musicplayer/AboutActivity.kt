@@ -20,7 +20,7 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun aboutText(): String{
-        return "Developed by: Madeline Yamada" +
+        return "Developed by: Ten Fong" +
         "\n\nProvide me some feedback to improve the app experience"
     }
 

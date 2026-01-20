@@ -75,7 +75,7 @@ class MusicAdapter(private val context: Context, var musicList: ArrayList<Music>
                     sendIntent(ref = "PlaylistDetailsAdapter", pos=position)
                 }
             }
-            // when song item is selected in selection activity, highlight it , else deselect it
+            // when song item is selected in selection activity, highlight it, else deselect it
             selectionActivity ->{
                 // Highlight song if it's already in the current playlist
                 val isInPlaylist = PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist

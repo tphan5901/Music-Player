@@ -66,10 +66,7 @@ class MainActivity : AppCompatActivity() {
                 else -> R.color.black
             }
         }
-
-
     }
-
 
     @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.R)
