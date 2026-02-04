@@ -121,7 +121,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             else {
                 val builder = MaterialAlertDialogBuilder(this)
                 builder.setTitle("Stop timer")
-                    .setMessage("Do u want to stop timer")
+                    .setMessage("Do you want to stop timer?")
                     .setPositiveButton("Yes") { _, _ ->
                         min15 = false
                         min30 = false
@@ -381,7 +381,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         dialog.setContentView(R.layout.bottom_sheet_dialog)
 
         dialog.findViewById<LinearLayout>(R.id.min_15)?.setOnClickListener {
-            Toast.makeText(this, "Music will stop after 15 mins", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Track will stop after 15 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min15 = true
             Thread {
@@ -392,7 +392,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         }
 
         dialog.findViewById<LinearLayout>(R.id.min_30)?.setOnClickListener {
-            Toast.makeText(this, "Music will stop after 30 mins", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Track will stop after 30 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min30 = true
             Thread {
@@ -403,7 +403,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         }
 
         dialog.findViewById<LinearLayout>(R.id.min_60)?.setOnClickListener {
-            Toast.makeText(this, "Music will stop after 60 mins", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Track will stop after 60 mins", Toast.LENGTH_SHORT).show()
             binding.timerBtnPA.setColorFilter(ContextCompat.getColor(this, R.color.purple_500))
             min60 = true
             Thread {

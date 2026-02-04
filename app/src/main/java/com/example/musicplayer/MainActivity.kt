@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navExit -> {
                     val builder = MaterialAlertDialogBuilder(this)
                     builder.setTitle("Exit")
-                        .setMessage("Do u want to close app")
+                        .setMessage("Do you want to exit this app?")
                         .setNegativeButton("No"){ dialog, _->
                             dialog.dismiss()
                         }
@@ -392,9 +392,6 @@ class MainActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
-
-
-
 
 }
 

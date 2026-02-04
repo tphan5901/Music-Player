@@ -64,7 +64,7 @@ class PlaylistDetails : AppCompatActivity() {
         binding.removeAllPD.setOnClickListener {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("Remove")
-                .setMessage("Do u want to remove all songs?")
+                .setMessage("Do you want to remove all songs?")
                 .setNegativeButton("No"){ dialog, _->
                     dialog.dismiss()
                 }
